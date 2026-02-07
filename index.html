@@ -195,6 +195,8 @@
       color: rgba(91,73,82,.88);
       font-size: 13.5px;
       line-height: 1.45;
+      white-space: pre-line;
+      min-height: 3.5em;
     }
 
     .heartBtn{
@@ -385,7 +387,6 @@
       pointer-events:auto;
     }
 
-    /* Transiciones */
     .page.anim-in-right{ animation: inRight .45s var(--ease) both; }
     .page.anim-out-left{ animation: outLeft .35s var(--ease) both; }
     .page.anim-in-left{ animation: inLeft .45s var(--ease) both; }
@@ -518,7 +519,6 @@
       overflow:hidden;
       position:relative;
     }
-    /* ✅ FOTO PRO */
     .frame img{
       width:100%;
       height:100%;
@@ -601,159 +601,7 @@
       letter-spacing: -0.01em;
     }
 
-    /* =========================
-       PAGE 2: MATRIZ PRO (3x3)
-    ========================== */
-    .reasonsHead{
-      text-align:center;
-      margin: 6px 0 10px;
-      font-family: var(--serif);
-      color: rgba(225,23,79,.95);
-    }
-    .reasonsTitle{
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      line-height: 1;
-    }
-    .reasonsTitle .n{ font-size: 58px; }
-    .reasonsTitle .t{ font-size: 30px; }
-    .reasonsScript{
-      margin-top: 6px;
-      font-size: 32px;
-      font-style: italic;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      opacity:.92;
-    }
-
-    .grid9{
-      margin-top: 12px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.42);
-      border: 2px solid rgba(225,23,79,.35);
-      box-shadow: 0 10px 22px rgba(0,0,0,.06);
-      overflow:hidden;
-      position:relative;
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .grid9::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        linear-gradient(to right,
-          transparent 0%,
-          transparent calc(33.333% - 1px),
-          rgba(225,23,79,.35) calc(33.333% - 1px),
-          rgba(225,23,79,.35) calc(33.333% + 1px),
-          transparent calc(33.333% + 1px),
-          transparent calc(66.666% - 1px),
-          rgba(225,23,79,.35) calc(66.666% - 1px),
-          rgba(225,23,79,.35) calc(66.666% + 1px),
-          transparent calc(66.666% + 1px),
-          transparent 100%
-        ),
-        linear-gradient(to bottom,
-          transparent 0%,
-          transparent calc(33.333% - 1px),
-          rgba(225,23,79,.35) calc(33.333% - 1px),
-          rgba(225,23,79,.35) calc(33.333% + 1px),
-          transparent calc(33.333% + 1px),
-          transparent calc(66.666% - 1px),
-          rgba(225,23,79,.35) calc(66.666% - 1px),
-          rgba(225,23,79,.35) calc(66.666% + 1px),
-          transparent calc(66.666% + 1px),
-          transparent 100%
-        );
-      pointer-events:none;
-      opacity:.95;
-    }
-
-    .cell9{
-      min-height: 128px;
-      padding: 18px 14px 14px;
-      display:grid;
-      place-items:center;
-      text-align:center;
-      position:relative;
-      font-family: var(--serif);
-      color: rgba(42,31,36,.78);
-    }
-    .cellNum{
-      position:absolute;
-      top: 10px;
-      left: 12px;
-      font-size: 22px;
-      font-weight: 900;
-      color: rgba(225,23,79,.92);
-    }
-    .cellTxt{
-      font-size: 15px;
-      line-height: 1.45;
-      max-width: 16ch;
-    }
-
-    .heartOnly .bigHeart{
-      font-size: 40px;
-      color: rgba(225,23,79,.92);
-      filter: drop-shadow(0 10px 18px rgba(225,23,79,.14));
-      opacity:.95;
-      animation: floatH 2.2s var(--ease2) infinite alternate;
-    }
-    @keyframes floatH{
-      from{ transform: translateY(0) scale(1); }
-      to  { transform: translateY(-4px) scale(1.03); }
-    }
-
-    .cell9.center{
-      background: radial-gradient(180px 120px at 50% 45%, rgba(225,23,79,.12), transparent 70%);
-    }
-
-    .signals{
-      margin-top: 14px;
-      text-align:center;
-      font-family: var(--serif);
-      color: rgba(42,31,36,.74);
-    }
-    .signalsKicker{
-      margin-top: 14px;
-      font-size: 12px;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-      color: rgba(42,31,36,.55);
-      font-weight: 900;
-    }
-    .signals h3{
-      margin: 8px 0 6px;
-      color: rgba(225,23,79,.95);
-      font-weight: 900;
-      font-size: 28px;
-      letter-spacing: -0.02em;
-    }
-    .signals p{ margin:0; font-size: 14px; color: rgba(42,31,36,.65); }
-
-    .redBoxes{
-      margin-top: 12px;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-    }
-    @media (max-width: 520px){ .redBoxes{ grid-template-columns: 1fr; } }
-    .red{
-      border-radius: 16px;
-      background: rgba(225,23,79,.92);
-      color: rgba(255,255,255,.95);
-      padding: 14px 12px;
-      font-weight: 800;
-      line-height: 1.35;
-      box-shadow: 0 12px 24px rgba(225,23,79,.18);
-      border: 1px solid rgba(255,255,255,.18);
-      font-size: 13.5px;
-    }
-
-    /* =========================
-       PAGE 3: PREGUNTA + NO PRO
-    ========================== */
+    /* PAGE 3 */
     .grand{
       text-align:center;
       font-family: var(--serif);
@@ -806,7 +654,6 @@
       place-items:center;
       touch-action: manipulation;
     }
-
     .choice{
       position:absolute;
       min-width: 170px;
@@ -823,7 +670,6 @@
       user-select:none;
     }
     .choice:active{ transform: translate(var(--tx), var(--ty)) scale(.985); }
-
     .choice.yes{
       z-index: 6;
       left: 50%;
@@ -845,9 +691,7 @@
       will-change: left, top, transform;
     }
 
-    /* =========================
-       PAGE 4: FINAL ROMÁNTICO
-    ========================== */
+    /* FINAL */
     .final{
       height: calc(100% - 0px);
       display:grid;
@@ -933,6 +777,7 @@
       opacity:.95;
       white-space: pre-line;
     }
+
     .finalGlow{
       position:absolute; inset:-20%;
       background:
@@ -951,7 +796,6 @@
 
     .heartFX{
       position: fixed;
-      top: -24px;
       z-index: 60;
       pointer-events:none;
       will-change: transform, opacity;
@@ -994,7 +838,7 @@
       cursor:pointer;
       box-shadow: 0 12px 24px rgba(0,0,0,.06);
       -webkit-tap-highlight-color: transparent;
-      transition: transform .12s var(--ease), filter .2s var(--ease), opacity .2s var(--ease);
+      transition: transform .12s var(--ease), opacity .2s var(--ease);
     }
     .nav button:active{ transform: scale(.985); }
     .nav button[disabled]{ opacity:.40; cursor:not-allowed; }
@@ -1004,10 +848,36 @@
       pointer-events:none;
       transform: translateY(6px);
     }
+
+    /* MUSIC BTN */
+    .musicBtn{
+      position: fixed;
+      right: 14px;
+      bottom: 14px;
+      z-index: 120;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.75);
+      background: rgba(255,255,255,.62);
+      color: rgba(42,31,36,.86);
+      font-weight: 900;
+      padding: 10px 12px;
+      cursor:pointer;
+      box-shadow: 0 12px 24px rgba(0,0,0,.10);
+      backdrop-filter: blur(8px);
+      display:none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .musicBtn.show{ display:block; }
   </style>
 </head>
 
 <body>
+  <!-- ✅ AUDIO: tu archivo real (con espacios) -->
+  <audio id="bgMusic" preload="auto" loop>
+    <source src="Stuck%20with%20you.mp3" type="audio/mpeg">
+  </audio>
+  <button class="musicBtn" id="musicBtn" type="button">🎵 Toca para música</button>
+
   <div class="bg-aurora"></div>
   <div class="bg-grain"></div>
   <div class="petals" id="petals" aria-hidden="true"></div>
@@ -1021,10 +891,7 @@
       <div class="envWrap">
         <div class="letter" id="letter">
           <h2>Para ti 💗</h2>
-          <p>
-            Esto es solo el comienzo…<br/>
-            (toca el corazón para abrir)
-          </p>
+          <p id="letterText"></p>
         </div>
 
         <button class="heartBtn" id="heartBtn" aria-label="Abrir sobre">
@@ -1042,7 +909,7 @@
         <div class="softShadow"></div>
       </div>
 
-      <div class="introHint">✨ Se abre con amor</div>
+      <div class="introHint" id="introHint">✨ Se abre con amor</div>
     </div>
   </section>
 
@@ -1098,7 +965,7 @@ y momentos que se queden grabados.
 
             <div class="photo">
               <div class="frame" aria-label="Foto de nosotros">
-                <!-- ✅ FOTO FIJA (tu archivo real en GitHub) -->
+                <!-- ✅ FOTO: tu archivo real -->
                 <img src="foto.jpg.jpeg" alt="Nuestra foto">
               </div>
               <div class="overlayBtn">¿Aceptas la misión de ser mi San Valentín?</div>
@@ -1134,57 +1001,6 @@ y momentos que se queden grabados.
           </div>
           <div class="rule"></div>
 
-          <div class="reasonsHead">
-            <div class="reasonsTitle">
-              <span class="n">5</span>
-              <span class="t"> Razones</span>
-            </div>
-            <div class="reasonsScript">por las que eres mi elección perfecta</div>
-          </div>
-
-          <div class="grid9" aria-label="Matriz de razones">
-            <div class="cell9">
-              <div class="cellNum">1</div>
-              <div class="cellTxt">Tienes la sonrisa más linda del universo.</div>
-            </div>
-            <div class="cell9 heartOnly"><div class="bigHeart">❤</div></div>
-            <div class="cell9">
-              <div class="cellNum">3</div>
-              <div class="cellTxt">Contigo, cualquier día se siente especial.</div>
-            </div>
-
-            <div class="cell9 heartOnly"><div class="bigHeart">❤</div></div>
-
-            <div class="cell9 center">
-              <div class="cellNum">2</div>
-              <div class="cellTxt">Haces que mi corazón lata más rápido cada vez que te pienso.</div>
-            </div>
-
-            <div class="cell9 heartOnly"><div class="bigHeart">❤</div></div>
-
-            <div class="cell9">
-              <div class="cellNum">4</div>
-              <div class="cellTxt">Eres mi persona favorita para compartir momentos.</div>
-            </div>
-            <div class="cell9 heartOnly"><div class="bigHeart">❤</div></div>
-            <div class="cell9">
-              <div class="cellNum">5</div>
-              <div class="cellTxt">No imagino a nadie más a mi lado en este San Valentín.</div>
-            </div>
-          </div>
-
-          <div class="signals">
-            <div class="signalsKicker">SEÑALES DE QUE</div>
-            <h3>Debes decir “Sí”</h3>
-            <p>Estudios recientes han demostrado que:</p>
-          </div>
-
-          <div class="redBoxes">
-            <div class="red">Si estás leyendo esto, significa que el destino nos ha unido.</div>
-            <div class="red">Si has sonreído al menos una vez, es una señal obvia.</div>
-            <div class="red">Si te gusta el romance, somos un match perfecto.</div>
-          </div>
-
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
@@ -1218,7 +1034,6 @@ y una sonrisa nerviosa:
 
           <div class="btnStage" id="btnStage">
             <button class="choice yes" id="yesBtn" type="button">SÍ 💖</button>
-            <!-- ✅ NO NO cambia nunca -->
             <button class="choice no" id="noBtn" type="button" tabindex="-1" aria-label="No (imposible)">NO 🙈</button>
           </div>
 
@@ -1268,6 +1083,56 @@ y recuerdos que se van a quedar.
     function rand(min, max){ return Math.random() * (max - min) + min; }
     function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
 
+    /* ========= MÚSICA (autoplay best-effort) ========= */
+    const bgMusic = document.getElementById("bgMusic");
+    const musicBtn = document.getElementById("musicBtn");
+    const introHint = document.getElementById("introHint");
+    let musicOn = false;
+
+    async function tryPlayMusic(){
+      if(!bgMusic || musicOn) return;
+      try{
+        bgMusic.volume = 0.6;
+        await bgMusic.play();
+        musicOn = true;
+        if(musicBtn) musicBtn.classList.remove("show");
+        if(introHint) introHint.textContent = "🎵 Música activada";
+      }catch{
+        if(musicBtn) musicBtn.classList.add("show");
+        if(introHint) introHint.textContent = "🎵 Toca para activar música";
+      }
+    }
+    window.addEventListener("load", tryPlayMusic);
+    ["click","touchstart","pointerdown"].forEach(ev=>{
+      window.addEventListener(ev, ()=>{ tryPlayMusic(); }, { passive:true });
+    });
+    if(musicBtn){
+      musicBtn.addEventListener("click", async ()=>{
+        if(!musicOn){
+          await tryPlayMusic();
+        }else{
+          bgMusic.pause();
+          musicOn = false;
+          musicBtn.textContent = "🎵 Toca para música";
+          musicBtn.classList.add("show");
+        }
+      });
+    }
+
+    /* ========= TYPEWRITER (carta) ========= */
+    function typewriter(el, text, speed=20){
+      if(!el) return;
+      el.textContent = "";
+      let i = 0;
+      const tick = () => {
+        el.textContent += text[i] ?? "";
+        i++;
+        if(i < text.length) setTimeout(tick, speed);
+      };
+      tick();
+    }
+    typewriter(document.getElementById("letterText"), "Esto es solo el comienzo…\n(toca el corazón para abrir)", 20);
+
     /* ========= PÉTALOS ========= */
     const petals = document.getElementById("petals");
     const COUNT = 70;
@@ -1300,9 +1165,9 @@ y recuerdos que se van a quedar.
     heartBtn.addEventListener("click", () => {
       if(opened) return;
       opened = true;
+      tryPlayMusic();
       introCard.classList.add("opened");
       heartsBurst(18);
-
       setTimeout(() => intro.classList.add("hide"), 850);
       setTimeout(() => show(0, "right"), 900);
     });
@@ -1319,8 +1184,6 @@ y recuerdos que se van a quedar.
 
     function updateNav(){
       prev.disabled = current === 0;
-
-      // Ocultar "SIGUIENTE" en la página de la pregunta (index 2)
       if(current === 2){
         next.classList.add("hidden");
         next.disabled = true;
@@ -1364,46 +1227,23 @@ y recuerdos que se van a quedar.
     next.addEventListener("click", () => show(current + 1, "right"));
     updateNav();
 
-    // swipe móvil
-    let startX = null;
-    document.querySelector(".mag").addEventListener("touchstart", (e)=>{
-      if(e.touches.length === 1) startX = e.touches[0].clientX;
-    }, {passive:true});
-    document.querySelector(".mag").addEventListener("touchend", (e)=>{
-      if(startX == null) return;
-      const endX = e.changedTouches[0].clientX;
-      const dx = endX - startX;
-      startX = null;
-      if(Math.abs(dx) < 60) return;
-      if(dx < 0) show(current + 1, "right");
-      else show(current - 1, "left");
-    }, {passive:true});
-
-    /* ========= NO ULTRA (huye del puntero) ========= */
+    /* ========= NO ULTRA (huye) ========= */
     const btnStage = document.getElementById("btnStage");
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
 
-    // ✅ NO enfocables (para teclado)
-    noBtn.setAttribute("tabindex","-1");
-
     let animatingNo = false;
-    let noX = 0;
-    let noY = 0;
+    let noX = 0, noY = 0;
 
     function stageLimits(){
       const s = btnStage.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
       const pad = 12;
-
-      // mitad derecha
       const minX = s.width * 0.56;
       const maxX = s.width - b.width - pad;
-
       const minY = pad;
       const maxY = s.height - b.height - pad;
-
-      return { s, b, pad, minX, maxX, minY, maxY };
+      return { s, b, minX, maxX, minY, maxY };
     }
 
     function setNoPos(x, y){
@@ -1414,9 +1254,7 @@ y recuerdos que se van a quedar.
 
     function placeNoInitial(){
       const { s, minX, maxX, minY, maxY } = stageLimits();
-      const x = clamp(s.width * 0.66, minX, maxX);
-      const y = clamp(s.height * 0.50, minY, maxY);
-      setNoPos(x, y);
+      setNoPos(clamp(s.width * 0.66, minX, maxX), clamp(s.height * 0.50, minY, maxY));
     }
 
     function springTo(targetX, targetY){
@@ -1436,12 +1274,10 @@ y recuerdos que se van a quedar.
         vx = (vx + dx * stiffness) * damping;
         vy = (vy + dy * stiffness) * damping;
 
-        noX += vx;
-        noY += vy;
+        noX += vx; noY += vy;
 
         const rot = clamp(vx * 0.35, -14, 14);
         noBtn.style.transform = `translate(0,0) rotate(${rot}deg)`;
-
         noBtn.style.left = noX + "px";
         noBtn.style.top  = noY + "px";
 
@@ -1477,14 +1313,12 @@ y recuerdos que se van a quedar.
       ty = clamp(ty, minY, maxY);
 
       springTo(tx, ty);
-
-      // ✅ IMPORTANTE: NO cambia nunca el texto del botón
+      // ✅ NO cambia texto nunca
     }
 
-    noBtn.addEventListener("pointermove", (e)=>{ dodgeNo(e); });
+    noBtn.addEventListener("pointermove", dodgeNo);
     noBtn.addEventListener("pointerdown", (e)=>{ e.preventDefault(); e.stopPropagation(); dodgeNo(e); });
-    noBtn.addEventListener("mouseenter", (e)=>{ dodgeNo(e); });
-    noBtn.addEventListener("focus", (e)=>{ dodgeNo(e); });
+    noBtn.addEventListener("mouseenter", dodgeNo);
 
     noBtn.addEventListener("touchstart", (e)=>{
       e.preventDefault(); e.stopPropagation();
@@ -1495,30 +1329,7 @@ y recuerdos que se van a quedar.
     window.addEventListener("resize", placeNoInitial);
     placeNoInitial();
 
-    /* ========= SÍ: pasa al final ========= */
-    function goFinal(){
-      heartsBurst(26);
-      show(3, "right");
-    }
-    yesBtn.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); goFinal(); });
-    yesBtn.addEventListener("pointerup", (e)=>{ e.preventDefault(); e.stopPropagation(); goFinal(); });
-
-    /* ========= EFECTO ROMÁNTICO FINAL ========= */
-    function romanticFinal(){
-      const finalCard = document.getElementById("finalCard");
-      finalCard.classList.add("finalOn");
-      heartsBurst(48);
-
-      const lace = finalCard.querySelector(".lace");
-      if(!prefersReduced){
-        lace.animate(
-          [{transform:"scale(1)"},{transform:"scale(1.03)"},{transform:"scale(1)"}],
-          {duration: 1200, easing:"cubic-bezier(.2,.7,.2,1)"}
-        );
-      }
-    }
-
-    /* ========= CORAZONES / BRILLOS ========= */
+    /* ========= CORAZONES ========= */
     function heartsBurst(amount = 20){
       if(prefersReduced) return;
 
@@ -1527,6 +1338,7 @@ y recuerdos que se van a quedar.
         el.className = "heartFX";
         el.textContent = Math.random() < .72 ? "💖" : (Math.random() < .5 ? "💘" : "✨");
         el.style.left = (Math.random() * 100) + "vw";
+        el.style.top  = (-24) + "px";
         el.style.fontSize = (14 + Math.random() * 28) + "px";
         el.style.opacity = "1";
 
@@ -1543,6 +1355,61 @@ y recuerdos que se van a quedar.
         ], { duration: dur, easing: "cubic-bezier(.2,.7,.2,1)" });
 
         setTimeout(()=> el.remove(), dur + 80);
+      }
+    }
+
+    // ✅ Corazones saliendo desde el botón "SÍ"
+    function heartsBurstFromElement(el, amount = 34){
+      if(prefersReduced) return;
+      const r = el.getBoundingClientRect();
+      for(let i=0;i<amount;i++){
+        const fx = document.createElement("div");
+        fx.className = "heartFX";
+        fx.textContent = Math.random() < .72 ? "💖" : (Math.random() < .5 ? "💘" : "✨");
+
+        const x = r.left + r.width/2 + (Math.random()*2 - 1) * 18;
+        const y = r.top  + r.height/2 + (Math.random()*2 - 1) * 14;
+
+        fx.style.left = x + "px";
+        fx.style.top  = y + "px";
+        fx.style.fontSize = (14 + Math.random() * 28) + "px";
+        fx.style.opacity = "1";
+        document.body.appendChild(fx);
+
+        const drift = (Math.random()*2 - 1) * 260;
+        const rotate = (Math.random()*2 - 1) * 620;
+        const fall = 95 + Math.random() * 35;
+        const dur = 1100 + Math.random() * 900;
+
+        fx.animate([
+          { transform: "translate3d(0,0,0) rotate(0deg)", opacity: 1 },
+          { transform: `translate3d(${drift}px, ${fall}vh, 0) rotate(${rotate}deg)`, opacity: 0 }
+        ], { duration: dur, easing: "cubic-bezier(.2,.7,.2,1)" });
+
+        setTimeout(()=> fx.remove(), dur + 80);
+      }
+    }
+
+    /* ========= SÍ -> FINAL ========= */
+    function goFinal(){
+      heartsBurstFromElement(yesBtn, 42);
+      show(3, "right");
+    }
+    yesBtn.addEventListener("click", (e)=>{ e.preventDefault(); e.stopPropagation(); goFinal(); });
+    yesBtn.addEventListener("pointerup", (e)=>{ e.preventDefault(); e.stopPropagation(); goFinal(); });
+
+    /* ========= FINAL ========= */
+    function romanticFinal(){
+      const finalCard = document.getElementById("finalCard");
+      finalCard.classList.add("finalOn");
+      heartsBurst(52);
+
+      const lace = finalCard.querySelector(".lace");
+      if(!prefersReduced){
+        lace.animate(
+          [{transform:"scale(1)"},{transform:"scale(1.03)"},{transform:"scale(1)"}],
+          {duration: 1200, easing:"cubic-bezier(.2,.7,.2,1)"}
+        );
       }
     }
   </script>
