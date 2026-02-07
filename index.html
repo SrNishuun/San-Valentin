@@ -165,4 +165,250 @@
       padding: 18px;
       z-index: 50;
     }
-    .modal
+    .modal.open{ display:flex; }
+    .modalCard{
+      width:min(520px, 92vw);
+      background: rgba(255,255,255,.95);
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .modalHead{
+      padding: 18px 18px 10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .x{
+      border:0;
+      background: rgba(0,0,0,.06);
+      border-radius: 12px;
+      padding: 8px 10px;
+      cursor:pointer;
+      font-weight:800;
+    }
+    .modalBody{
+      padding: 0 18px 18px;
+      text-align:left;
+      color: var(--text);
+    }
+    .big{
+      font-size: 20px;
+      font-weight: 900;
+      margin: 0 0 10px;
+    }
+    .small{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .actions{
+      padding: 0 18px 18px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .ghost{
+      background: rgba(0,0,0,.06);
+      color: var(--text);
+      box-shadow:none;
+      position:static;
+      min-width:auto;
+    }
+
+    /* Confetti de corazones */
+    .heart{
+      position: fixed;
+      top: -24px;
+      z-index: 60;
+      pointer-events:none;
+      will-change: transform, opacity;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.15));
+    }
+
+    /* Respeto a usuarios con menos animación */
+    @media (prefers-reduced-motion: reduce){
+      .bg-hearts{ display:none; }
+      .btn{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-hearts"></div>
+
+  <main class="wrap">
+    <section class="card" aria-label="Pregunta de San Valentín">
+      <div class="topbar">
+        <div class="pill">💌 Mensaje importante</div>
+        <div class="pill">✨ Interactivo</div>
+      </div>
+
+      <div class="content">
+        <h1>¿Quieres ser mi 14 de febrero? 💘</h1>
+        <p class="sub">Pista: el “No” es demasiado tímido… y no se deja tocar 😅</p>
+
+        <div class="stage" id="stage" role="group" aria-label="Botones de respuesta">
+          <button class="btn" id="yes">Sí 💖</button>
+          <button class="btn" id="no" aria-label="No (botón escurridizo)">No 🙈</button>
+        </div>
+
+        <p class="hint">Intenta darle “No” si te atreves 😈</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Respuesta">
+      <div class="modalHead">
+        <div class="pill">🎉 Resultado</div>
+        <button class="x" id="close">✕</button>
+      </div>
+      <div class="modalBody">
+        <p class="big">¡Siiii! 🥰💘</p>
+        <p class="small">
+          Sabía que dirías que sí. <br>
+          Ahora toca celebrar como se debe ✨
+        </p>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" id="copy">Copiar link 🔗</button>
+        <button class="btn" id="ok" style="position:static;">Cerrar 💖</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const stage = document.getElementById("stage");
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const modal = document.getElementById("modal");
+    const closeBtn = document.getElementById("close");
+    const okBtn = document.getElementById("ok");
+    const copyBtn = document.getElementById("copy");
+
+    // --- Botón NO imposible ---
+    let dodgeCount = 0;
+
+    function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+    function moveNoButton() {
+      const s = stage.getBoundingClientRect();
+      const b = noBtn.getBoundingClientRect();
+
+      const padding = 10;
+      const maxX = s.width - b.width - padding * 2;
+      const maxY = s.height - b.height - padding * 2;
+
+      // Aleatorio dentro del contenedor
+      const x = padding + Math.random() * maxX;
+      const y = padding + Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      dodgeCount++;
+      if (dodgeCount === 3) noBtn.textContent = "¿Eh? 😳";
+      if (dodgeCount === 6) noBtn.textContent = "Nope 😈";
+      if (dodgeCount === 9) noBtn.textContent = "Imposible 🙅";
+    }
+
+    // Se mueve cuando te acercas (mouse)
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    // En móvil: se mueve al tocar (antes del click)
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    }, { passive: false });
+
+    // Y también en pointerdown (captura el intento de click ANTES)
+    noBtn.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+
+    // Si logran enfocarlo con teclado, también huye 😅
+    noBtn.addEventListener("focus", moveNoButton);
+
+    // Posición inicial del "No" para que no quede raro en pantallas pequeñas
+    function placeNoInitial(){
+      const s = stage.getBoundingClientRect();
+      noBtn.style.left = clamp(s.width * 0.62, 10, s.width - 150) + "px";
+      noBtn.style.top  = clamp(s.height * 0.52, 10, s.height - 60) + "px";
+    }
+    window.addEventListener("resize", placeNoInitial);
+    placeNoInitial();
+
+    // --- Confetti de corazones ---
+    function heartsBurst(amount = 22) {
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) return;
+
+      for (let i = 0; i < amount; i++) {
+        const el = document.createElement("div");
+        el.className = "heart";
+        el.textContent = Math.random() < 0.75 ? "💖" : "💘";
+        el.style.left = (Math.random() * 100) + "vw";
+        el.style.fontSize = (14 + Math.random() * 22) + "px";
+        el.style.opacity = "1";
+
+        const drift = (Math.random() * 2 - 1) * 180;   // -180 a 180 px
+        const rotate = (Math.random() * 2 - 1) * 360;  // rotación
+        const fall = 110 + Math.random() * 30;         // vh
+        const dur = 1200 + Math.random() * 900;        // ms
+
+        document.body.appendChild(el);
+
+        // animate
+        el.animate([
+          { transform: "translate3d(0,0,0) rotate(0deg)", opacity: 1 },
+          { transform: `translate3d(${drift}px, ${fall}vh, 0) rotate(${rotate}deg)`, opacity: 0 }
+        ], { duration: dur, easing: "cubic-bezier(.2,.7,.2,1)" });
+
+        setTimeout(() => el.remove(), dur + 50);
+      }
+    }
+
+    // --- Modal éxito ---
+    function openModal(){
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+    }
+    function closeModal(){
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+    }
+
+    yesBtn.addEventListener("click", () => {
+      heartsBurst(28);
+      openModal();
+      yesBtn.disabled = true;
+      noBtn.disabled = true;
+      yesBtn.textContent = "Elegiste bien 💖";
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    okBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Copiar link (opcional, pro)
+    copyBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(location.href);
+        copyBtn.textContent = "¡Copiado! ✅";
+        setTimeout(()=> copyBtn.textContent = "Copiar link 🔗", 1400);
+      }catch{
+        copyBtn.textContent = "No se pudo 😅";
+        setTimeout(()=> copyBtn.textContent = "Copiar link 🔗", 1400);
+      }
+    });
+  </script>
+</body>
+</html>
