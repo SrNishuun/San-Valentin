@@ -14,9 +14,7 @@
       --rose:#e1174f;
       --rose2:#ff2d6b;
       --ink:#2a1f24;
-      --ink2:#5b4952;
       --paper:#ffeaf2;
-      --paper2:#ffe2ee;
       --line: rgba(225,23,79,.55);
       --line2: rgba(225,23,79,.25);
       --shadow: 0 26px 70px rgba(0,0,0,.18);
@@ -40,32 +38,29 @@
     }
 
     /* ------------------------------
-       FONDO CON MOVIMIENTO (REAL)
-       - Aurora gradient animado
-       - Bruma (grain) en movimiento
-       - Pétalos flotando
+       FONDO CON MOVIMIENTO (más evidente)
     ------------------------------ */
     .bg-aurora{
-      position: fixed; inset:-20%;
-      z-index:-3;
+      position: fixed; inset:-22%;
+      z-index:-4;
       background:
-        radial-gradient(900px 560px at 18% 20%, rgba(225,23,79,.22), transparent 60%),
-        radial-gradient(900px 560px at 85% 30%, rgba(255,255,255,.55), transparent 60%),
-        radial-gradient(900px 560px at 55% 90%, rgba(255,45,107,.14), transparent 60%),
+        radial-gradient(900px 560px at 18% 20%, rgba(225,23,79,.26), transparent 60%),
+        radial-gradient(900px 560px at 85% 30%, rgba(255,255,255,.65), transparent 60%),
+        radial-gradient(900px 560px at 55% 90%, rgba(255,45,107,.18), transparent 60%),
         linear-gradient(135deg, var(--pink0), var(--pink1));
-      filter: saturate(1.06);
-      animation: auroraDrift 10s var(--ease2) infinite alternate;
+      filter: saturate(1.10);
+      animation: auroraDrift 9s var(--ease2) infinite alternate;
     }
     @keyframes auroraDrift{
-      from{ transform: translate3d(-1.4%, -0.8%, 0) scale(1.02); }
-      to  { transform: translate3d( 1.4%,  1.0%, 0) scale(1.08); }
+      from{ transform: translate3d(-1.7%, -1.1%, 0) scale(1.03); }
+      to  { transform: translate3d( 1.7%,  1.2%, 0) scale(1.10); }
     }
 
     /* Bruma/ruido suave */
     .bg-grain{
       position: fixed; inset:-30%;
-      z-index:-2;
-      opacity:.18;
+      z-index:-3;
+      opacity:.16;
       background-image:
         repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px, transparent 2px, transparent 6px),
         repeating-linear-gradient(90deg, rgba(0,0,0,.04) 0px, rgba(0,0,0,.04) 1px, transparent 2px, transparent 7px);
@@ -77,28 +72,30 @@
       100% { transform: translate3d( 2%,  2%, 0) rotate(1deg); }
     }
 
-    /* Pétalos */
+    /* PÉTALOS: más cantidad, más grandes, más opacidad */
     .petals{
       position: fixed; inset:-10%;
-      z-index:-1;
+      z-index:-2;
       pointer-events:none;
-      opacity:.75;
+      opacity:1;
     }
     .petal{
       position:absolute;
-      width: 10px; height: 10px;
-      border-radius: 4px 10px 4px 10px;
-      background: rgba(225,23,79,.16);
-      filter: blur(.2px);
+      width: 14px; height: 14px;
+      border-radius: 6px 14px 6px 14px;
+      background: rgba(225,23,79,.28);
+      filter: blur(.15px);
+      box-shadow: 0 10px 22px rgba(225,23,79,.10);
       animation: fall linear infinite;
+      transform: rotate(15deg);
     }
-    .petal:nth-child(3n){ background: rgba(255,255,255,.45); }
-    .petal:nth-child(4n){ background: rgba(255,45,107,.11); }
+    .petal.white{ background: rgba(255,255,255,.65); }
+    .petal.soft { background: rgba(255,45,107,.18); }
 
     @keyframes fall{
-      0%   { transform: translate3d(var(--x), -120px, 0) rotate(0deg); opacity:0; }
-      12%  { opacity:.85; }
-      100% { transform: translate3d(calc(var(--x) + var(--drift)), 120vh, 0) rotate(260deg); opacity:0; }
+      0%   { transform: translate3d(var(--x), -140px, 0) rotate(0deg); opacity:0; }
+      10%  { opacity:var(--op); }
+      100% { transform: translate3d(calc(var(--x) + var(--drift)), 120vh, 0) rotate(340deg); opacity:0; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -127,7 +124,6 @@
       position:relative;
     }
 
-    /* “papel” */
     .mag::before{
       content:"";
       position:absolute; inset:0;
@@ -139,13 +135,11 @@
       pointer-events:none;
     }
 
-    .pages{
-      position:absolute; inset:0;
-    }
+    .pages{ position:absolute; inset:0; }
 
     .page{
       position:absolute; inset:0;
-      padding: 18px 18px 72px; /* deja espacio para navegación */
+      padding: 18px 18px 72px;
       overflow:auto;
       -webkit-overflow-scrolling: touch;
       opacity:0;
@@ -159,7 +153,6 @@
       pointer-events:auto;
     }
 
-    /* Header tipo “periódico” */
     .topline{
       display:flex;
       align-items:center;
@@ -169,7 +162,6 @@
       letter-spacing: .08em;
       text-transform: uppercase;
     }
-    .topline span{ opacity:.9; }
 
     .rule{
       height:2px;
@@ -183,7 +175,6 @@
       background: var(--line2);
     }
 
-    /* Títulos */
     .masthead{
       text-align:center;
       font-family: var(--serif);
@@ -193,7 +184,6 @@
       font-size: 46px;
       line-height: 1;
       margin: 8px 0 8px;
-      text-transform: none;
     }
     .subhead-row{
       display:flex;
@@ -206,7 +196,6 @@
       padding: 0 4px;
     }
 
-    /* “Will you be my Valentine?” estilo grande */
     .bigQuestion{
       text-align:center;
       margin: 22px 0 10px;
@@ -233,7 +222,6 @@
       letter-spacing: .02em;
     }
 
-    /* Layout columnas (texto + foto) */
     .columns{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -248,10 +236,9 @@
       background: rgba(255,255,255,.55);
       border: 1px solid rgba(225,23,79,.18);
       border-radius: 16px;
-      padding: 12px 12px 12px;
+      padding: 12px;
       box-shadow: 0 10px 22px rgba(0,0,0,.06);
     }
-
     .article .kicker{
       display:flex;
       justify-content:space-between;
@@ -263,7 +250,6 @@
       border-bottom: 1px solid rgba(225,23,79,.18);
       padding-bottom: 8px;
     }
-
     .article p{
       margin:0;
       font-family: var(--serif);
@@ -273,7 +259,6 @@
       white-space: pre-line;
     }
 
-    /* Foto placeholder */
     .photo{
       background: rgba(255,255,255,.55);
       border: 1px solid rgba(225,23,79,.18);
@@ -301,8 +286,6 @@
       text-align:center;
       padding: 0 10px;
     }
-
-    /* Botón dentro de la foto (texto) */
     .overlayBtn{
       margin-top: 10px;
       display:block;
@@ -314,11 +297,9 @@
       font-weight: 900;
       padding: 10px 12px;
       text-align:center;
-      font-family: var(--sans);
       letter-spacing: .02em;
     }
 
-    /* Cupones */
     .tickets{
       margin-top: 16px;
       display:grid;
@@ -326,9 +307,7 @@
       gap: 12px;
       align-items:stretch;
     }
-    @media (max-width: 520px){
-      .tickets{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px){ .tickets{ grid-template-columns: 1fr; } }
     .ticket{
       border-radius: 18px;
       border: 1px solid rgba(225,23,79,.25);
@@ -359,7 +338,7 @@
     }
     .ticket .body{
       flex:1;
-      padding: 12px 12px;
+      padding: 12px;
       display:flex;
       flex-direction:column;
       justify-content:center;
@@ -380,9 +359,7 @@
       letter-spacing: -0.01em;
     }
 
-    /* ------------------------------
-       PÁGINA 2: Razones
-    ------------------------------ */
+    /* PAGE 2 */
     .bigTitle{
       text-align:center;
       font-family: var(--serif);
@@ -390,23 +367,11 @@
       margin: 8px 0 8px;
       line-height:1.05;
     }
-    .bigTitle .n{
-      font-size: 54px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
-    .bigTitle .t{
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-    }
+    .bigTitle .n{ font-size: 54px; font-weight: 900; letter-spacing: -0.02em; }
+    .bigTitle .t{ font-size: 28px; font-weight: 900; letter-spacing: -0.02em; }
     .bigTitle .s{
-      display:block;
-      margin-top: 4px;
-      font-size: 30px;
-      font-style: italic;
-      font-weight: 900;
-      letter-spacing: -0.02em;
+      display:block; margin-top: 4px;
+      font-size: 30px; font-style: italic; font-weight: 900; letter-spacing: -0.02em;
     }
 
     .grid5{
@@ -415,9 +380,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 12px;
     }
-    @media (max-width: 520px){
-      .grid5{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px){ .grid5{ grid-template-columns: 1fr; } }
 
     .reason{
       border-radius: 18px;
@@ -451,11 +414,8 @@
       position:relative;
     }
     .reason .heart{
-      position:absolute;
-      right: 12px;
-      bottom: 10px;
-      font-size: 22px;
-      opacity:.65;
+      position:absolute; right: 12px; bottom: 10px;
+      font-size: 22px; opacity:.65;
     }
 
     .signals{
@@ -471,20 +431,15 @@
       font-size: 28px;
       letter-spacing: -0.02em;
     }
-    .signals p{
-      margin:0;
-      font-size: 14px;
-      color: rgba(42,31,36,.65);
-    }
+    .signals p{ margin:0; font-size: 14px; color: rgba(42,31,36,.65); }
+
     .redBoxes{
       margin-top: 12px;
       display:grid;
       grid-template-columns: 1fr 1fr 1fr;
       gap: 10px;
     }
-    @media (max-width: 520px){
-      .redBoxes{ grid-template-columns: 1fr; }
-    }
+    @media (max-width: 520px){ .redBoxes{ grid-template-columns: 1fr; } }
     .red{
       border-radius: 16px;
       background: rgba(225,23,79,.92);
@@ -497,9 +452,7 @@
       font-size: 13.5px;
     }
 
-    /* ------------------------------
-       PÁGINA 3: La gran pregunta + dinámica NO imposible
-    ------------------------------ */
+    /* PAGE 3: Pregunta + botones juntos */
     .grand{
       text-align:center;
       font-family: var(--serif);
@@ -509,7 +462,6 @@
       font-size: 34px;
       letter-spacing: -0.02em;
     }
-
     .paragraph{
       text-align:center;
       font-family: var(--serif);
@@ -519,16 +471,6 @@
       font-size: 16px;
       white-space: pre-line;
     }
-
-    .ask{
-      margin-top: 18px;
-      text-align:center;
-      font-family: var(--serif);
-      color: rgba(42,31,36,.70);
-      font-size: 16px;
-      letter-spacing: .02em;
-    }
-
     .bigAsk{
       margin: 12px 0 8px;
       text-align:center;
@@ -538,28 +480,39 @@
       letter-spacing: -0.02em;
       line-height: 1.05;
     }
-    .bigAsk .top{
-      font-size: 34px;
-    }
-    .bigAsk .bottom{
-      font-size: 40px;
-      font-style: italic;
-    }
-
-    .answers{
-      margin-top: 18px;
-      display:flex;
-      flex-direction:column;
-      gap: 12px;
-      align-items:center;
+    .bigAsk .top{ font-size: 34px; }
+    .bigAsk .bottom{ font-size: 40px; font-style: italic; }
+    .ask{
+      margin-top: 10px;
+      text-align:center;
+      font-family: var(--serif);
+      color: rgba(42,31,36,.70);
+      font-size: 16px;
+      letter-spacing: .02em;
     }
 
-    .yesBtn{
-      width:min(420px, 92%);
+    /* Bloque donde viven SÍ y NO (juntos) */
+    .btnStage{
+      margin: 16px auto 0;
+      width: min(480px, 94%);
+      height: 110px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.38);
+      border: 1px solid rgba(225,23,79,.18);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.40);
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+    }
+
+    .choice{
+      position:absolute;
+      min-width: 170px;
       padding: 14px 16px;
       border-radius: 999px;
       border: 2px solid rgba(225,23,79,.58);
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.58);
       color: rgba(225,23,79,.95);
       font-weight: 900;
       letter-spacing: .02em;
@@ -567,46 +520,39 @@
       cursor:pointer;
       -webkit-tap-highlight-color: transparent;
       transition: transform .12s var(--ease), filter .2s var(--ease);
+      user-select:none;
     }
-    .yesBtn:active{ transform: scale(.985); }
-    .yesBtn:hover{ filter: brightness(1.02); }
+    .choice:active{ transform: scale(.985); }
 
-    /* Botón NO escurridizo (pequeño, imposible) */
-    .noArea{
-      position: relative;
-      width:min(460px, 94%);
-      height: 92px;
-      margin-top: 6px;
-      border-radius: 18px;
-      border: 1px dashed rgba(225,23,79,.25);
-      background: rgba(255,255,255,.30);
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
-      overflow:hidden;
-      display:grid;
-      place-items:center;
-      color: rgba(42,31,36,.60);
-      font-weight: 800;
-      font-size: 13px;
+    .yes{
+      left: 50%;
+      top: 50%;
+      transform: translate(-112%, -50%);
     }
-    .noBtn{
-      position:absolute;
-      padding: 10px 14px;
-      border-radius: 999px;
+    .yes:hover{ filter: brightness(1.02); }
+
+    .no{
+      left: 50%;
+      top: 50%;
+      transform: translate(12%, -50%);
       border: 0;
       background: rgba(20,20,25,.78);
       color: rgba(255,255,255,.94);
-      font-weight: 900;
-      cursor:pointer;
-      -webkit-tap-highlight-color: transparent;
       box-shadow: 0 14px 28px rgba(0,0,0,.12);
-      transition: transform .12s var(--ease);
-      user-select:none;
+      min-width: 120px;
     }
-    .noBtn:active{ transform: scale(.98); }
 
-    /* ------------------------------
-       PÁGINA 4: Confirmado
-    ------------------------------ */
+    .miniFooter{
+      text-align:center;
+      margin-top: 14px;
+      font-size: 11px;
+      letter-spacing:.16em;
+      text-transform: uppercase;
+      color: rgba(42,31,36,.45);
+      opacity:.8;
+    }
+
+    /* PAGE 4 */
     .final{
       height: calc(100% - 0px);
       display:grid;
@@ -657,10 +603,8 @@
       border: 2px dashed rgba(225,23,79,.35);
     }
     .lace .txt{
-      position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
+      position:absolute; inset:0;
+      display:grid; place-items:center;
       font-family: var(--serif);
       font-weight: 900;
       color: rgba(225,23,79,.92);
@@ -670,11 +614,8 @@
       text-align:center;
     }
     .initials{
-      display:flex;
-      justify-content:center;
-      gap: 10px;
-      margin-top: -12px;
-      position:relative;
+      display:flex; justify-content:center; gap:10px;
+      margin-top: -12px; position:relative;
     }
     .init{
       width: 58px; height: 44px;
@@ -682,8 +623,7 @@
       background: rgba(255,255,255,.92);
       color: rgba(225,23,79,.92);
       font-weight: 1000;
-      display:grid;
-      place-items:center;
+      display:grid; place-items:center;
       box-shadow: 0 14px 30px rgba(0,0,0,.16);
       border: 1px solid rgba(255,255,255,.55);
       font-family: var(--serif);
@@ -699,9 +639,7 @@
       white-space: pre-line;
     }
 
-    /* ------------------------------
-       Navegación inferior
-    ------------------------------ */
+    /* NAV */
     .nav{
       position:absolute;
       left:0; right:0; bottom:0;
@@ -730,17 +668,6 @@
     }
     .nav button:active{ transform: scale(.985); }
     .nav button[disabled]{ opacity:.40; cursor:not-allowed; }
-
-    /* pequeño footer marca (puedes quitarlo) */
-    .miniFooter{
-      text-align:center;
-      margin-top: 14px;
-      font-size: 11px;
-      letter-spacing:.16em;
-      text-transform: uppercase;
-      color: rgba(42,31,36,.45);
-      opacity:.8;
-    }
   </style>
 </head>
 
@@ -754,9 +681,7 @@
 
       <div class="pages">
 
-        <!-- =========================
-             PAGE 1: PORTADA
-        ========================== -->
+        <!-- PAGE 1 -->
         <section class="page active" data-page="0" aria-label="Portada">
           <div class="topline">
             <span>Edición especial</span>
@@ -805,7 +730,7 @@ y momentos que se queden grabados.
               <div class="frame">
                 <small>
                   (Aquí va una foto de ustedes 💞)<br/>
-                  Más adelante la ponemos.
+                  Luego la ponemos.
                 </small>
               </div>
               <div class="overlayBtn">¿Aceptas la misión de ser mi San Valentín?</div>
@@ -832,9 +757,7 @@ y momentos que se queden grabados.
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- =========================
-             PAGE 2: RAZONES
-        ========================== -->
+        <!-- PAGE 2 -->
         <section class="page" data-page="1" aria-label="Razones">
           <div class="topline">
             <span>Edición especial</span>
@@ -850,31 +773,11 @@ y momentos que se queden grabados.
           </div>
 
           <div class="grid5">
-            <div class="reason">
-              <div class="num">1</div>
-              <div class="txt">Tienes la sonrisa más linda del universo.</div>
-              <div class="heart">❤</div>
-            </div>
-            <div class="reason">
-              <div class="num">2</div>
-              <div class="txt">Haces que mi corazón lata más rápido cada vez que te pienso.</div>
-              <div class="heart">❤</div>
-            </div>
-            <div class="reason">
-              <div class="num">3</div>
-              <div class="txt">Contigo, cualquier día se siente especial.</div>
-              <div class="heart">❤</div>
-            </div>
-            <div class="reason">
-              <div class="num">4</div>
-              <div class="txt">Eres mi persona favorita para compartir momentos.</div>
-              <div class="heart">❤</div>
-            </div>
-            <div class="reason">
-              <div class="num">5</div>
-              <div class="txt">No imagino a nadie más a mi lado en este San Valentín.</div>
-              <div class="heart">❤</div>
-            </div>
+            <div class="reason"><div class="num">1</div><div class="txt">Tienes la sonrisa más linda del universo.</div><div class="heart">❤</div></div>
+            <div class="reason"><div class="num">2</div><div class="txt">Haces que mi corazón lata más rápido cada vez que te pienso.</div><div class="heart">❤</div></div>
+            <div class="reason"><div class="num">3</div><div class="txt">Contigo, cualquier día se siente especial.</div><div class="heart">❤</div></div>
+            <div class="reason"><div class="num">4</div><div class="txt">Eres mi persona favorita para compartir momentos.</div><div class="heart">❤</div></div>
+            <div class="reason"><div class="num">5</div><div class="txt">No imagino a nadie más a mi lado en este San Valentín.</div><div class="heart">❤</div></div>
           </div>
 
           <div class="signals">
@@ -891,9 +794,7 @@ y momentos que se queden grabados.
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- =========================
-             PAGE 3: LA GRAN PREGUNTA + NO IMPOSIBLE
-        ========================== -->
+        <!-- PAGE 3 -->
         <section class="page" data-page="2" aria-label="La gran pregunta">
           <div class="topline">
             <span>Edición especial</span>
@@ -921,32 +822,24 @@ y una sonrisa nerviosa:
 
           <div class="ask">Elige tu respuesta:</div>
 
-          <div class="answers">
-            <button class="yesBtn" id="yes1">OBVIO, LO ESTABA ESPERANDO 💘</button>
-            <button class="yesBtn" id="yes2">SÍ, POR SUPUESTOOO 💖</button>
-
-            <div class="noArea" id="noArea" aria-label="Área del botón No">
-              (El “No” es tímido 😅)
-              <button class="noBtn" id="noBtn" aria-label="No (imposible)">No 🙈</button>
-            </div>
+          <!-- Botones juntos (como veníamos trabajando) -->
+          <div class="btnStage" id="btnStage">
+            <button class="choice yes" id="yesBtn">SÍ 💖</button>
+            <button class="choice no" id="noBtn" aria-label="No (imposible)">NO 🙈</button>
           </div>
 
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- =========================
-             PAGE 4: CONFIRMADO
-        ========================== -->
+        <!-- PAGE 4 -->
         <section class="page" data-page="3" aria-label="Confirmado">
           <div class="final">
             <div class="finalCard">
               <h2>Confirmado oficialmente:</h2>
 
-              <div class="lace">
-                <div class="txt">Eres mi San Valentín.</div>
-              </div>
+              <div class="lace"><div class="txt">Eres mi San Valentín.</div></div>
 
-              <div class="initials" aria-label="Iniciales">
+              <div class="initials">
                 <div class="init">A</div>
                 <div class="init">J</div>
               </div>
@@ -965,7 +858,6 @@ y recuerdos que se van a quedar.
 
       </div>
 
-      <!-- NAV -->
       <div class="nav" aria-label="Navegación">
         <button id="prev">PAG. ANTERIOR</button>
         <button id="next">PAG. SIGUIENTE</button>
@@ -974,32 +866,39 @@ y recuerdos que se van a quedar.
   </div>
 
   <script>
-    /* ------------------------------
-       PÉTALOS (fondo animado)
-    ------------------------------ */
+    /* ========= PÉTALOS MÁS VISIBLES ========= */
     const petals = document.getElementById("petals");
-    const COUNT = 26;
+    const COUNT = 70; // más cantidad
 
     function rand(min, max){ return Math.random() * (max - min) + min; }
 
     for(let i=0; i<COUNT; i++){
       const p = document.createElement("div");
       p.className = "petal";
+
+      // variedad de colores
+      const r = Math.random();
+      if(r < 0.22) p.classList.add("white");
+      else if(r < 0.52) p.classList.add("soft");
+
+      const size = rand(10, 20);
+      p.style.width = size + "px";
+      p.style.height = size + "px";
+
       p.style.left = rand(0, 100) + "vw";
-      p.style.top  = rand(-20, 110) + "vh";
-      p.style.opacity = rand(.20, .85);
-      p.style.width = rand(7, 12) + "px";
-      p.style.height = rand(7, 12) + "px";
-      p.style.setProperty("--x", rand(-20, 20) + "px");
-      p.style.setProperty("--drift", rand(-140, 140) + "px");
-      p.style.animationDuration = rand(7, 14) + "s";
-      p.style.animationDelay = rand(-14, 0) + "s";
+      p.style.top  = rand(-30, 110) + "vh";
+
+      p.style.setProperty("--x", rand(-40, 40) + "px");
+      p.style.setProperty("--drift", rand(-220, 220) + "px");
+      p.style.setProperty("--op", rand(.35, .95));
+
+      p.style.animationDuration = rand(6.5, 13.5) + "s";
+      p.style.animationDelay = rand(-13.5, 0) + "s";
+
       petals.appendChild(p);
     }
 
-    /* ------------------------------
-       PÁGINAS: anterior / siguiente
-    ------------------------------ */
+    /* ========= PÁGINAS ========= */
     const pages = [...document.querySelectorAll(".page")];
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
@@ -1010,14 +909,13 @@ y recuerdos que se van a quedar.
       pages.forEach((p, idx) => p.classList.toggle("active", idx === current));
       prev.disabled = current === 0;
       next.disabled = current === pages.length - 1;
-      // sube al inicio del contenido de la página
       pages[current].scrollTop = 0;
     }
 
     prev.addEventListener("click", () => show(current - 1));
     next.addEventListener("click", () => show(current + 1));
 
-    // Swipe en móvil (izq/der) opcional (suave)
+    // swipe móvil
     let startX = null;
     document.querySelector(".mag").addEventListener("touchstart", (e)=>{
       if(e.touches.length === 1) startX = e.touches[0].clientX;
@@ -1035,34 +933,31 @@ y recuerdos que se van a quedar.
 
     show(0);
 
-    /* ------------------------------
-       PÁGINA 3: DINÁMICA NO IMPOSIBLE
-       - se mueve antes del click (pointerdown/touchstart)
-    ------------------------------ */
+    /* ========= DINÁMICA NO IMPOSIBLE (misma idea anterior) ========= */
+    const btnStage = document.getElementById("btnStage");
     const noBtn = document.getElementById("noBtn");
-    const noArea = document.getElementById("noArea");
-    const yes1 = document.getElementById("yes1");
-    const yes2 = document.getElementById("yes2");
+    const yesBtn = document.getElementById("yesBtn");
 
     let dodges = 0;
 
     function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
 
     function placeNoInitial(){
-      const a = noArea.getBoundingClientRect();
-      // posición inicial dentro del área
-      const x = clamp(a.width * 0.62, 10, a.width - 120);
-      const y = clamp(a.height * 0.48, 10, a.height - 46);
+      const s = btnStage.getBoundingClientRect();
+      // arranca a la derecha, al lado del sí
+      const x = clamp(s.width * 0.62, 12, s.width - 150);
+      const y = clamp(s.height * 0.50, 12, s.height - 52);
       noBtn.style.left = x + "px";
       noBtn.style.top  = y + "px";
     }
 
     function moveNo(){
-      const a = noArea.getBoundingClientRect();
+      const s = btnStage.getBoundingClientRect();
       const b = noBtn.getBoundingClientRect();
-      const pad = 10;
-      const maxX = a.width - b.width - pad*2;
-      const maxY = a.height - b.height - pad*2;
+      const pad = 12;
+
+      const maxX = s.width - b.width - pad*2;
+      const maxY = s.height - b.height - pad*2;
 
       const x = pad + Math.random() * maxX;
       const y = pad + Math.random() * maxY;
@@ -1077,7 +972,7 @@ y recuerdos que se van a quedar.
       if(dodges >= 12) noBtn.textContent = "😅";
     }
 
-    // Captura antes de click
+    // se mueve ANTES del click (imposible tocarlo)
     noBtn.addEventListener("pointerdown", (e)=>{ e.preventDefault(); moveNo(); });
     noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNo(); }, {passive:false});
     noBtn.addEventListener("mouseenter", moveNo);
@@ -1086,12 +981,8 @@ y recuerdos que se van a quedar.
     window.addEventListener("resize", placeNoInitial);
     placeNoInitial();
 
-    // Cuando dice SÍ → ir a Confirmado
-    function acceptYes(){
-      show(3);
-    }
-    yes1.addEventListener("click", acceptYes);
-    yes2.addEventListener("click", acceptYes);
+    // Sí → confirmación
+    yesBtn.addEventListener("click", () => show(3));
   </script>
 </body>
 </html>
