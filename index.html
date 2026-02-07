@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="es">
 <head>
@@ -601,6 +602,154 @@
       letter-spacing: -0.01em;
     }
 
+    /* =========================
+       ✅ PAGE 2 (RECUPERADA) · MATRIZ BONITA + ANIMADA
+    ========================== */
+    .reasonsTitle{
+      text-align:center;
+      margin: 10px 0 6px;
+      font-family: var(--serif);
+      color: rgba(225,23,79,.95);
+      font-weight: 900;
+      font-size: 44px;
+      letter-spacing: -0.02em;
+      line-height: 1.02;
+    }
+    .reasonsSubtitle{
+      text-align:center;
+      margin: 0 0 14px;
+      font-family: var(--serif);
+      font-style: italic;
+      color: rgba(42,31,36,.72);
+      letter-spacing: .01em;
+    }
+
+    .reasonsGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      align-items:stretch;
+    }
+    @media (max-width: 520px){
+      .reasonsGrid{ grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .reasonCard{
+      position:relative;
+      border-radius: 18px;
+      background: rgba(255,255,255,.60);
+      border: 1px solid rgba(225,23,79,.22);
+      box-shadow: 0 12px 24px rgba(0,0,0,.06);
+      padding: 14px 12px 12px;
+      overflow:hidden;
+      transform: translateY(10px);
+      opacity: 0;
+      animation: reasonIn .55s var(--ease) forwards;
+    }
+    .reasonCard::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(220px 160px at 20% 15%, rgba(225,23,79,.10), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .reasonCard:nth-child(1){ animation-delay: .02s; }
+    .reasonCard:nth-child(2){ animation-delay: .08s; }
+    .reasonCard:nth-child(3){ animation-delay: .14s; }
+    .reasonCard:nth-child(4){ animation-delay: .20s; }
+    .reasonCard:nth-child(5){ animation-delay: .26s; }
+
+    @keyframes reasonIn{
+      to{ transform: translateY(0); opacity:1; }
+    }
+
+    .reasonNum{
+      position:absolute;
+      top: 10px;
+      left: 12px;
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      font-family: var(--serif);
+      font-weight: 900;
+      color: rgba(255,255,255,.95);
+      background: linear-gradient(135deg, rgba(225,23,79,.95), rgba(255,45,107,.88));
+      box-shadow: 0 12px 24px rgba(225,23,79,.18);
+    }
+
+    .reasonText{
+      margin-top: 26px;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.45;
+      color: rgba(42,31,36,.80);
+      white-space: pre-line;
+      text-align:center;
+      padding: 0 4px;
+      min-height: 3.6em;
+    }
+
+    .reasonHeart{
+      margin-top: 10px;
+      text-align:center;
+      font-size: 20px;
+      animation: reasonPulse 1.4s var(--ease) infinite;
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,.10));
+    }
+    @keyframes reasonPulse{
+      0%,100%{ transform: scale(1); }
+      50%{ transform: scale(1.16); }
+    }
+
+    .signals{
+      margin-top: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.42);
+      border: 1px solid rgba(225,23,79,.16);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.40);
+      padding: 14px 12px 12px;
+    }
+    .signalsTitle{
+      text-align:center;
+      font-family: var(--serif);
+      font-weight: 900;
+      color: rgba(225,23,79,.95);
+      font-size: 24px;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+    .signalsGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 520px){
+      .signalsGrid{ grid-template-columns: 1fr; }
+    }
+    .signalCard{
+      border-radius: 16px;
+      padding: 12px 12px;
+      background: linear-gradient(135deg, rgba(225,23,79,.95), rgba(255,45,107,.86));
+      color: rgba(255,255,255,.95);
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.35;
+      text-align:center;
+      box-shadow: 0 14px 30px rgba(225,23,79,.22);
+      transform: scale(.98);
+      opacity: 0;
+      animation: signalPop .55s var(--ease) forwards;
+    }
+    .signalCard:nth-child(1){ animation-delay: .06s; }
+    .signalCard:nth-child(2){ animation-delay: .12s; }
+    .signalCard:nth-child(3){ animation-delay: .18s; }
+
+    @keyframes signalPop{
+      to{ transform: scale(1); opacity: 1; }
+    }
+
     /* PAGE 3 */
     .grand{
       text-align:center;
@@ -992,7 +1141,7 @@ y momentos que se queden grabados.
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- PAGE 2 -->
+        <!-- ✅ PAGE 2 (MATRIZ RECUPERADA) -->
         <section class="page" data-page="1" aria-label="Razones">
           <div class="topline">
             <span>Edición especial</span>
@@ -1000,6 +1149,50 @@ y momentos que se queden grabados.
             <span>Juntos por siempre</span>
           </div>
           <div class="rule"></div>
+
+          <div class="reasonsTitle">5 razones</div>
+          <div class="reasonsSubtitle">por las que eres mi elección perfecta</div>
+
+          <div class="reasonsGrid">
+            <div class="reasonCard">
+              <div class="reasonNum">1</div>
+              <div class="reasonText">Tu sonrisa me arregla el día.</div>
+              <div class="reasonHeart">💖</div>
+            </div>
+
+            <div class="reasonCard">
+              <div class="reasonNum">2</div>
+              <div class="reasonText">Contigo, todo se siente más bonito.</div>
+              <div class="reasonHeart">💘</div>
+            </div>
+
+            <div class="reasonCard">
+              <div class="reasonNum">3</div>
+              <div class="reasonText">Me haces reír cuando más lo necesito.</div>
+              <div class="reasonHeart">✨</div>
+            </div>
+
+            <div class="reasonCard">
+              <div class="reasonNum">4</div>
+              <div class="reasonText">Me encanta cómo eres… en serio.</div>
+              <div class="reasonHeart">💞</div>
+            </div>
+
+            <div class="reasonCard">
+              <div class="reasonNum">5</div>
+              <div class="reasonText">Este San Valentín, te elijo a ti.</div>
+              <div class="reasonHeart">💗</div>
+            </div>
+          </div>
+
+          <div class="signals">
+            <div class="signalsTitle">Señales de que debes decir “Sí”</div>
+            <div class="signalsGrid">
+              <div class="signalCard">Si sonreíste leyendo esto… ya sabes la respuesta. 😌</div>
+              <div class="signalCard">Si te gusta el romance… esto es una invitación oficial. 💌</div>
+              <div class="signalCard">Si tu corazón hizo “tin” … es destino. 💘</div>
+            </div>
+          </div>
 
           <div class="miniFooter">Valentine Edition</div>
         </section>
@@ -1313,7 +1506,6 @@ y recuerdos que se van a quedar.
       ty = clamp(ty, minY, maxY);
 
       springTo(tx, ty);
-      // ✅ NO cambia texto nunca
     }
 
     noBtn.addEventListener("pointermove", dodgeNo);
@@ -1358,7 +1550,6 @@ y recuerdos que se van a quedar.
       }
     }
 
-    // ✅ Corazones saliendo desde el botón "SÍ"
     function heartsBurstFromElement(el, amount = 34){
       if(prefersReduced) return;
       const r = el.getBoundingClientRect();
@@ -1415,3 +1606,4 @@ y recuerdos que se van a quedar.
   </script>
 </body>
 </html>
+```
