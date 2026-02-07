@@ -858,6 +858,7 @@
       position:relative;
       overflow:hidden;
     }
+
     .finalCard::before{
       content:"";
       position:absolute; inset:-2px;
@@ -1379,7 +1380,6 @@ y recuerdos que se van a quedar.
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
 
-    let dodges = 0;
     let animatingNo = false;
     let noX = 0;
     let noY = 0;
@@ -1474,11 +1474,8 @@ y recuerdos que se van a quedar.
 
       springTo(tx, ty);
 
-      dodges++;
-      if(dodges === 3) noBtn.textContent = "¿Eh? 😳";
-      if(dodges === 6) noBtn.textContent = "Nope 😈";
-      if(dodges === 9) noBtn.textContent = "Imposible 🙅";
-      if(dodges >= 12) noBtn.textContent = "😅";
+      // ✅ IMPORTANTE: NO cambia nunca el texto del botón
+      // (Se queda como "NO 🙈" siempre)
     }
 
     // huye al acercarte (más difícil)
