@@ -518,13 +518,21 @@
       overflow:hidden;
       position:relative;
     }
-    .frame small{
-      color: rgba(42,31,36,.55);
-      font-weight:700;
-      letter-spacing:.02em;
-      text-align:center;
-      padding: 0 10px;
+    /* ✅ FOTO PRO */
+    .frame img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform .55s var(--ease);
+      will-change: transform;
+      filter: saturate(1.05) contrast(1.03);
     }
+    .frame:hover img{ transform: scale(1.06); }
+    @media (hover: none){
+      .frame:hover img{ transform: scale(1.02); }
+    }
+
     .overlayBtn{
       margin-top: 10px;
       display:block;
@@ -858,7 +866,6 @@
       position:relative;
       overflow:hidden;
     }
-
     .finalCard::before{
       content:"";
       position:absolute; inset:-2px;
@@ -1090,11 +1097,9 @@ y momentos que se queden grabados.
             </div>
 
             <div class="photo">
-              <div class="frame">
-                <small>
-                  (Aquí va una foto de ustedes 💞)<br/>
-                  Luego la ponemos.
-                </small>
+              <div class="frame" aria-label="Foto de nosotros">
+                <!-- ✅ FOTO FIJA (tu archivo real en GitHub) -->
+                <img src="foto.jpg.jpeg" alt="Nuestra foto">
               </div>
               <div class="overlayBtn">¿Aceptas la misión de ser mi San Valentín?</div>
             </div>
@@ -1120,7 +1125,7 @@ y momentos que se queden grabados.
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- PAGE 2 (Matriz) -->
+        <!-- PAGE 2 -->
         <section class="page" data-page="1" aria-label="Razones">
           <div class="topline">
             <span>Edición especial</span>
@@ -1137,7 +1142,6 @@ y momentos que se queden grabados.
             <div class="reasonsScript">por las que eres mi elección perfecta</div>
           </div>
 
-          <!-- 3x3 -->
           <div class="grid9" aria-label="Matriz de razones">
             <div class="cell9">
               <div class="cellNum">1</div>
@@ -1151,7 +1155,6 @@ y momentos que se queden grabados.
 
             <div class="cell9 heartOnly"><div class="bigHeart">❤</div></div>
 
-            <!-- ✅ CENTRO: sin corazón -->
             <div class="cell9 center">
               <div class="cellNum">2</div>
               <div class="cellTxt">Haces que mi corazón lata más rápido cada vez que te pienso.</div>
@@ -1185,7 +1188,7 @@ y momentos que se queden grabados.
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- PAGE 3 (Pregunta) -->
+        <!-- PAGE 3 -->
         <section class="page" data-page="2" aria-label="La gran pregunta">
           <div class="topline">
             <span>Edición especial</span>
@@ -1215,13 +1218,14 @@ y una sonrisa nerviosa:
 
           <div class="btnStage" id="btnStage">
             <button class="choice yes" id="yesBtn" type="button">SÍ 💖</button>
-            <button class="choice no" id="noBtn" type="button" aria-label="No (imposible)">NO 🙈</button>
+            <!-- ✅ NO NO cambia nunca -->
+            <button class="choice no" id="noBtn" type="button" tabindex="-1" aria-label="No (imposible)">NO 🙈</button>
           </div>
 
           <div class="miniFooter">Valentine Edition</div>
         </section>
 
-        <!-- PAGE 4 (Final) -->
+        <!-- PAGE 4 -->
         <section class="page" data-page="3" aria-label="Confirmado" id="finalPage">
           <div class="final">
             <div class="finalCard" id="finalCard">
@@ -1316,7 +1320,7 @@ y recuerdos que se van a quedar.
     function updateNav(){
       prev.disabled = current === 0;
 
-      // Ocultar "SIGUIENTE" en la penúltima página (la de la pregunta = index 2)
+      // Ocultar "SIGUIENTE" en la página de la pregunta (index 2)
       if(current === 2){
         next.classList.add("hidden");
         next.disabled = true;
@@ -1375,10 +1379,13 @@ y recuerdos que se van a quedar.
       else show(current - 1, "left");
     }, {passive:true});
 
-    /* ========= NO ULTRA (huye del puntero + más distancia + más rápido) ========= */
+    /* ========= NO ULTRA (huye del puntero) ========= */
     const btnStage = document.getElementById("btnStage");
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
+
+    // ✅ NO enfocables (para teclado)
+    noBtn.setAttribute("tabindex","-1");
 
     let animatingNo = false;
     let noX = 0;
@@ -1412,15 +1419,14 @@ y recuerdos que se van a quedar.
       setNoPos(x, y);
     }
 
-    // spring rápido (más agresivo)
     function springTo(targetX, targetY){
       if(prefersReduced){ setNoPos(targetX, targetY); return; }
       if(animatingNo) return;
       animatingNo = true;
 
       let vx = 0, vy = 0;
-      const stiffness = 0.20;  // más rápido
-      const damping = 0.72;    // menos amortiguación = más huye
+      const stiffness = 0.20;
+      const damping = 0.72;
       const snap = 0.7;
 
       function step(){
@@ -1449,7 +1455,6 @@ y recuerdos que se van a quedar.
       requestAnimationFrame(step);
     }
 
-    // huye del puntero (direccional) + distancia grande
     function dodgeNo(ev){
       const { s, b, minX, maxX, minY, maxY } = stageLimits();
 
@@ -1464,8 +1469,7 @@ y recuerdos que se van a quedar.
       const len = Math.hypot(dx, dy) || 1;
       dx /= len; dy /= len;
 
-      // MUCHA distancia + un poco de aleatoriedad
-      const flee = 240 + Math.random() * 260; // 240–500px
+      const flee = 240 + Math.random() * 260;
       let tx = (noX + dx * flee) + (Math.random()*2 - 1) * 80;
       let ty = (noY + dy * flee) + (Math.random()*2 - 1) * 55;
 
@@ -1475,10 +1479,8 @@ y recuerdos que se van a quedar.
       springTo(tx, ty);
 
       // ✅ IMPORTANTE: NO cambia nunca el texto del botón
-      // (Se queda como "NO 🙈" siempre)
     }
 
-    // huye al acercarte (más difícil)
     noBtn.addEventListener("pointermove", (e)=>{ dodgeNo(e); });
     noBtn.addEventListener("pointerdown", (e)=>{ e.preventDefault(); e.stopPropagation(); dodgeNo(e); });
     noBtn.addEventListener("mouseenter", (e)=>{ dodgeNo(e); });
