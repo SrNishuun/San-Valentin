@@ -36,7 +36,6 @@
       --prog: 0%;
     }
 
-    /* ✅ Tema oscuro (modo noche romántico) */
     body.night{
       background: radial-gradient(900px 700px at 20% 10%, rgba(255,45,107,.18), transparent 55%),
                   linear-gradient(135deg, #120a10, #2a0f1b);
@@ -54,15 +53,11 @@
       background: linear-gradient(135deg, var(--pink0), var(--pink1));
     }
 
-    /* ✅ Accesibilidad: focus visible */
     button:focus-visible{
       outline: 3px solid rgba(225,23,79,.55);
       outline-offset: 4px;
     }
 
-    /* =========================
-       FONDO CON MOVIMIENTO
-    ========================== */
     .bg-aurora{
       position: fixed; inset:-22%;
       z-index:-5;
@@ -106,7 +101,6 @@
       100% { transform: translate3d( 2%,  2%, 0) rotate(1deg); }
     }
 
-    /* Pétalos */
     .petals{
       position: fixed; inset:-10%;
       z-index:-3;
@@ -136,9 +130,6 @@
       .bg-aurora, .bg-grain, .petal{ animation:none !important; }
     }
 
-    /* =========================
-       INTRO: SOBRE / CARTA
-    ========================== */
     .intro{
       position: fixed; inset:0;
       z-index: 50;
@@ -404,9 +395,6 @@
       color: rgba(255,255,255,.75);
     }
 
-    /* =========================
-       REVISTA / PÁGINAS
-    ========================== */
     .app{
       height:100%;
       display:grid;
@@ -774,9 +762,6 @@
     }
     body.night .ticket .body .value{ color: rgba(255,122,152,.95); }
 
-    /* =========================
-       PAGE 2: RAZONES + SEÑALES
-    ========================== */
     .p2Header{
       text-align:center;
       margin: 8px 0 10px;
@@ -980,9 +965,6 @@
     .signalBox:nth-child(3){ animation-delay:.17s; }
     @keyframes sigIn{ to{ transform: translateY(0); opacity:1; } }
 
-    /* =========================
-       PAGE 3: GALERÍA POLAROIDS
-    ========================== */
     .galleryTitle{
       text-align:center;
       font-family: var(--serif);
@@ -1066,7 +1048,6 @@
     }
     body.night .polaroid .cap{ color: rgba(255,255,255,.78); }
 
-    /* Modal zoom */
     .modal{
       position: fixed; inset:0;
       background: rgba(0,0,0,.55);
@@ -1136,9 +1117,23 @@
       background: rgba(0,0,0,.08);
     }
 
-    /* =========================
-       PAGE 4: PREGUNTA
-    ========================== */
+    /* ✅ NUEVO: descripción debajo de la imagen */
+    .modalDesc{
+      padding: 12px 14px 14px;
+      background: rgba(255,255,255,.75);
+      border-top: 1px solid rgba(225,23,79,.14);
+      font-family: var(--serif);
+      color: rgba(42,31,36,.78);
+      line-height: 1.45;
+      font-size: 15px;
+      white-space: pre-line;
+    }
+    body.night .modalDesc{
+      background: rgba(255,255,255,.06);
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.78);
+    }
+
     .grand{
       text-align:center;
       font-family: var(--serif);
@@ -1250,9 +1245,6 @@
       box-shadow: 0 14px 28px rgba(0,0,0,.28);
     }
 
-    /* =========================
-       PAGE 5: FINAL
-    ========================== */
     .final{
       height: calc(100% - 0px);
       display:grid;
@@ -1374,9 +1366,6 @@
       100%{ opacity:1; transform: scale(1.02); }
     }
 
-    /* =========================
-       CORAZONES PRO
-    ========================== */
     .heartFXPro{
       position: fixed;
       z-index: 80;
@@ -1405,9 +1394,6 @@
     }
     body.night .miniFooter{ color: rgba(255,255,255,.40); }
 
-    /* =========================
-       NAV + PROGRESO + TOGGLES
-    ========================== */
     .nav{
       position:absolute;
       left:0; right:0; bottom:0;
@@ -1530,9 +1516,6 @@
       transition: width .35s var(--ease);
     }
 
-    /* =========================
-       Cupón descargable (Canvas)
-    ========================== */
     .couponBox{
       margin: 16px auto 0;
       width: min(520px, 95%);
@@ -1588,12 +1571,10 @@
 </head>
 
 <body>
-  <!-- ✅ AUDIO: música de fondo -->
   <audio id="bgMusic" preload="auto" loop>
     <source src="Stuck%20with%20you.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- ✅ SFX (opcional): si no tienes estos archivos, no pasa nada -->
   <audio id="sfxPage" preload="auto">
     <source src="page.mp3" type="audio/mpeg">
   </audio>
@@ -1615,6 +1596,8 @@
       <div class="modalImgWrap">
         <img class="modalImg" id="modalImg" alt="Foto ampliada">
       </div>
+      <!-- ✅ NUEVO: descripción -->
+      <div class="modalDesc" id="modalDesc"></div>
     </div>
   </div>
 
@@ -1752,9 +1735,7 @@ y momentos que se queden grabados.
                   <span class="txt">Tienes la sonrisa<br>más linda<br>del universo.</span>
                 </div>
               </div>
-              <div class="cell r1 c2">
-                <div class="bigHeart">❤️</div>
-              </div>
+              <div class="cell r1 c2"><div class="bigHeart">❤️</div></div>
               <div class="cell r1 c3">
                 <div class="reasonBlock">
                   <div class="n">3</div>
@@ -1762,18 +1743,14 @@ y momentos que se queden grabados.
                 </div>
               </div>
 
-              <div class="cell r2 c1">
-                <div class="bigHeart">❤️</div>
-              </div>
+              <div class="cell r2 c1"><div class="bigHeart">❤️</div></div>
               <div class="cell r2 c2">
                 <div class="reasonBlock">
                   <div class="n">2</div>
                   <span class="txt">Haces que mi<br>corazón lata<br>más rápido<br>cada vez que<br>te pienso</span>
                 </div>
               </div>
-              <div class="cell r2 c3">
-                <div class="bigHeart">❤️</div>
-              </div>
+              <div class="cell r2 c3"><div class="bigHeart">❤️</div></div>
 
               <div class="cell r3 c1">
                 <div class="reasonBlock">
@@ -1781,9 +1758,7 @@ y momentos que se queden grabados.
                   <span class="txt">Eres mi<br>persona<br>favorita<br>para<br>compartir<br>momentos.</span>
                 </div>
               </div>
-              <div class="cell r3 c2">
-                <div class="bigHeart">❤️</div>
-              </div>
+              <div class="cell r3 c2"><div class="bigHeart">❤️</div></div>
               <div class="cell r3 c3">
                 <div class="reasonBlock">
                   <div class="n">5</div>
@@ -1820,54 +1795,102 @@ y momentos que se queden grabados.
           <div class="galleryTitle">Mini galería</div>
           <div class="gallerySub">Toca una polaroid para verla en grande ✨</div>
 
+          <!-- ✅ Aquí están las descripciones lindas -->
           <div class="polaroids" id="polaroids">
-            <div class="polaroid" style="--rot:-2.4deg" data-src="Foto%201.jpeg" data-title="Foto 1 💗">
+            <div class="polaroid" style="--rot:-2.4deg"
+              data-src="Foto%201.jpeg"
+              data-title="Foto 1 💗"
+              data-desc="Cómo olvidar cuando me fuiste a buscar al terminal… ahí supe que contigo todo se siente seguro. 🚌💞">
               <div class="pic"><img src="Foto%201.jpeg" alt="Foto 1" loading="lazy" decoding="async"></div>
               <div class="cap">Foto 1 💗</div>
             </div>
-            <div class="polaroid" style="--rot:1.7deg" data-src="Foto%202.jpeg" data-title="Foto 2 💗">
+
+            <div class="polaroid" style="--rot:1.7deg"
+              data-src="Foto%202.jpeg"
+              data-title="Foto 2 🌸"
+              data-desc="Este fue el día en que conocí a tu mamita… y entendí de dónde viene tanta ternura. 🌷🤍">
               <div class="pic"><img src="Foto%202.jpeg" alt="Foto 2" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 2 💗</div>
+              <div class="cap">Foto 2 🌸</div>
             </div>
-            <div class="polaroid" style="--rot:2.2deg" data-src="Foto%203.jpeg" data-title="Foto 3 ✨">
+
+            <div class="polaroid" style="--rot:2.2deg"
+              data-src="Foto%203.jpeg"
+              data-title="Foto 3 🎡"
+              data-desc="Cuando fuimos al October y me dieron el doble de fichas jeje… contigo la suerte y la risa siempre se multiplican. 🍻✨">
               <div class="pic"><img src="Foto%203.jpeg" alt="Foto 3" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 3 ✨</div>
+              <div class="cap">Foto 3 🎡</div>
             </div>
-            <div class="polaroid" style="--rot:-1.3deg" data-src="Foto%204.jpeg" data-title="Foto 4 🫶">
+
+            <div class="polaroid" style="--rot:-1.3deg"
+              data-src="Foto%204.jpeg"
+              data-title="Foto 4 🎄"
+              data-desc="Nuestra primera Navidad en familia… un pedacito de hogar que quiero repetir toda la vida. 🎁❤️">
               <div class="pic"><img src="Foto%204.jpeg" alt="Foto 4" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 4 🫶</div>
+              <div class="cap">Foto 4 🎄</div>
             </div>
-            <div class="polaroid" style="--rot:1.2deg" data-src="Foto%205.jpeg" data-title="Foto 5 💞">
+
+            <div class="polaroid" style="--rot:1.2deg"
+              data-src="Foto%205.jpeg"
+              data-title="Foto 5 ✨"
+              data-desc="Qué elegancia y belleza juntas en una misma foto… mi orgullo y mi debilidad. 😍👑">
               <div class="pic"><img src="Foto%205.jpeg" alt="Foto 5" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 5 💞</div>
+              <div class="cap">Foto 5 ✨</div>
             </div>
-            <div class="polaroid" style="--rot:-2.0deg" data-src="Foto%206.jpeg" data-title="Foto 6 ✨">
+
+            <div class="polaroid" style="--rot:-2.0deg"
+              data-src="Foto%206.jpeg"
+              data-title="Foto 6 🎬"
+              data-desc="Nuestra primera vez (de muchas) en el cine… una de nuestras primeras citas, y yo ya estaba feliz de tu mano. 🍿💗">
               <div class="pic"><img src="Foto%206.jpeg" alt="Foto 6" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 6 ✨</div>
+              <div class="cap">Foto 6 🎬</div>
             </div>
-            <div class="polaroid" style="--rot:2.6deg" data-src="Foto%207.jpeg" data-title="Foto 7 🗺️">
+
+            <div class="polaroid" style="--rot:2.6deg"
+              data-src="Foto%207.jpeg"
+              data-title="Foto 7 🌊"
+              data-desc="Qué día más lindo… el agua estaba helada y a mí me dieron muchas ganas de ir al baño jajaja. Contigo hasta el caos es tierno. 😂🫶">
               <div class="pic"><img src="Foto%207.jpeg" alt="Foto 7" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 7 🗺️</div>
+              <div class="cap">Foto 7 🌊</div>
             </div>
-            <div class="polaroid" style="--rot:-1.6deg" data-src="Foto%208.jpeg" data-title="Foto 8 🫶">
+
+            <div class="polaroid" style="--rot:-1.6deg"
+              data-src="Foto%208.jpeg"
+              data-title="Foto 8 🚗"
+              data-desc="Cuando quedamos en pana y teníamos que ir a Cañete jaja… y aun así, lo pasé increíble porque estabas tú. 🤭❤️">
               <div class="pic"><img src="Foto%208.jpeg" alt="Foto 8" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 8 🫶</div>
+              <div class="cap">Foto 8 🚗</div>
             </div>
-            <div class="polaroid" style="--rot:1.9deg" data-src="Foto%209.jpeg" data-title="Foto 9 🥰">
+
+            <div class="polaroid" style="--rot:1.9deg"
+              data-src="Foto%209.jpeg"
+              data-title="Foto 9 🫧"
+              data-desc="Foto de nuestro primer aniversario en el jacuzzi afuera del domo… burbujas, frío afuera y amor calentito adentro. 🥰♨️">
               <div class="pic"><img src="Foto%209.jpeg" alt="Foto 9" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 9 🥰</div>
+              <div class="cap">Foto 9 🫧</div>
             </div>
-            <div class="polaroid" style="--rot:-2.2deg" data-src="Foto%2010.jpeg" data-title="Foto 10 💗">
+
+            <div class="polaroid" style="--rot:-2.2deg"
+              data-src="Foto%2010.jpeg"
+              data-title="Foto 10 🏍️"
+              data-desc="Cuando nos llovió en el valle y andábamos en moto… mojados, pero felices: contigo cualquier aventura vale la pena. 🌧️💘">
               <div class="pic"><img src="Foto%2010.jpeg" alt="Foto 10" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 10 💗</div>
+              <div class="cap">Foto 10 🏍️</div>
             </div>
-            <div class="polaroid" style="--rot:1.4deg" data-src="Foto%2011.jpeg" data-title="Foto 11 ✨">
+
+            <div class="polaroid" style="--rot:1.4deg"
+              data-src="Foto%2011.jpeg"
+              data-title="Foto 11 ⛰️"
+              data-desc="El Diego nos tomó esta linda foto en el Pichachén… y yo solo pensaba: qué suerte la mía de vivir esto contigo. 📸🤍">
               <div class="pic"><img src="Foto%2011.jpeg" alt="Foto 11" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 11 ✨</div>
+              <div class="cap">Foto 11 ⛰️</div>
             </div>
-            <div class="polaroid" style="--rot:-1.9deg" data-src="Foto%2012.jpeg" data-title="Foto 12 💘">
+
+            <div class="polaroid" style="--rot:-1.9deg"
+              data-src="Foto%2012.jpeg"
+              data-title="Foto 12 🏖️"
+              data-desc="Cuando fuimos a la playa con los chiquillos… sol, risas y nosotros, como siempre, guardando recuerdos para el corazón. 🌞💞">
               <div class="pic"><img src="Foto%2012.jpeg" alt="Foto 12" loading="lazy" decoding="async"></div>
-              <div class="cap">Foto 12 💘</div>
+              <div class="cap">Foto 12 🏖️</div>
             </div>
           </div>
 
@@ -1969,7 +1992,6 @@ y recuerdos que se van a quedar.
   </div>
 
   <script>
-    /* ========= UTIL ========= */
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     function rand(min, max){ return Math.random() * (max - min) + min; }
     function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
@@ -1983,18 +2005,15 @@ y recuerdos que se van a quedar.
       setTimeout(()=> t.classList.remove("show"), 1400);
     }
 
-    /* ✅ Pausar animaciones al ir a segundo plano */
     document.addEventListener("visibilitychange", ()=>{
       const paused = document.hidden;
       document.documentElement.style.setProperty("--animPlay", paused ? "paused" : "running");
     });
 
-    /* ========= CONFIG PERSONALIZACIÓN ========= */
     const NOMBRE = "Tu Amor";
     const INI_1 = "A";
     const INI_2 = "J";
 
-    /* ========= AUDIO ========= */
     const bgMusic = document.getElementById("bgMusic");
     const sfxPage = document.getElementById("sfxPage");
     const sfxPop  = document.getElementById("sfxPop");
@@ -2029,7 +2048,6 @@ y recuerdos que se van a quedar.
       }
     }
 
-    /* ========= TYPEWRITER ========= */
     function typewriter(el, text, speed=20){
       if(!el) return;
       el.textContent = "";
@@ -2043,7 +2061,6 @@ y recuerdos que se van a quedar.
     }
     typewriter(document.getElementById("letterText"), "Esto es solo el comienzo…\n(toca el corazón para abrir)", 20);
 
-    /* ========= MINI PERSONALIZACIÓN UI ========= */
     const subRow = document.querySelector(".subhead-row span:nth-child(2)");
     if(subRow) subRow.textContent = `Para ${NOMBRE} 💗`;
 
@@ -2058,7 +2075,6 @@ y recuerdos que se van a quedar.
     if(init1) init1.textContent = INI_1;
     if(init2) init2.textContent = INI_2;
 
-    /* ✅ Mensaje final con “saludo” según hora */
     const finalMsg = document.getElementById("finalMsg");
     (function(){
       const h = new Date().getHours();
@@ -2075,7 +2091,6 @@ y recuerdos que se van a quedar.`;
       }
     })();
 
-    /* ========= FOTO PRINCIPAL ========= */
     const mainPhoto = document.getElementById("mainPhoto");
     const mainFrame = document.getElementById("mainFrame");
     if(mainPhoto && mainFrame){
@@ -2091,7 +2106,6 @@ y recuerdos que se van a quedar.`;
       }, { once:true });
     }
 
-    /* ========= PÉTALOS ========= */
     const petals = document.getElementById("petals");
     const COUNT = window.innerWidth < 420 ? 40 : 70;
     if(petals){
@@ -2116,7 +2130,6 @@ y recuerdos que se van a quedar.`;
       }
     }
 
-    /* ========= INTRO: ABRIR CARTA ========= */
     const intro = document.getElementById("intro");
     const introCard = document.getElementById("introCard");
     const heartBtn = document.getElementById("heartBtn");
@@ -2143,7 +2156,6 @@ y recuerdos que se van a quedar.`;
       }, 900);
     });
 
-    /* ========= SECRETO: sello ========= */
     const seal = document.getElementById("seal");
     let sealTaps = 0;
     let sealTimer = null;
@@ -2163,7 +2175,6 @@ y recuerdos que se van a quedar.`;
       });
     }
 
-    /* ========= PÁGINAS + NAV + PROGRESO ========= */
     const pages = [...document.querySelectorAll(".page")];
     const prev = document.getElementById("prev");
     const next = document.getElementById("next");
@@ -2246,7 +2257,6 @@ y recuerdos que se van a quedar.`;
       if(e.key === "Escape") closeModal();
     });
 
-    /* swipe */
     const magEl = document.querySelector(".mag");
     let sx=0, sy=0;
     if(magEl){
@@ -2275,7 +2285,6 @@ y recuerdos que se van a quedar.`;
       });
     }
 
-    /* ========= MODO NOCHE ========= */
     const toggleNight = document.getElementById("toggleNight");
     const savedNight = localStorage.getItem("night") === "1";
     if(savedNight) document.body.classList.add("night");
@@ -2289,7 +2298,6 @@ y recuerdos que se van a quedar.`;
       });
     }
 
-    /* ========= SHARE ========= */
     const shareBtn = document.getElementById("shareBtn");
     if(shareBtn){
       shareBtn.addEventListener("click", async ()=>{
@@ -2309,17 +2317,19 @@ y recuerdos que se van a quedar.`;
       });
     }
 
-    /* ========= GALERÍA (modal) ========= */
+    /* ========= GALERÍA (modal) + descripción ========= */
     const modal = document.getElementById("modal");
     const modalImg = document.getElementById("modalImg");
     const modalTitle = document.getElementById("modalTitle");
+    const modalDesc = document.getElementById("modalDesc");
     const closeModalBtn = document.getElementById("closeModal");
     const polaroids = document.getElementById("polaroids");
 
-    function openModal(src, title){
+    function openModal(src, title, desc){
       if(!modal || !modalImg) return;
       modalImg.src = src;
       if(modalTitle) modalTitle.textContent = title || "💗";
+      if(modalDesc) modalDesc.textContent = desc || "";
       modal.classList.add("show");
       modal.setAttribute("aria-hidden","false");
       playSfx(sfxPop, 0.18);
@@ -2330,13 +2340,14 @@ y recuerdos que se van a quedar.`;
       modal.classList.remove("show");
       modal.setAttribute("aria-hidden","true");
       if(modalImg) modalImg.src = "";
+      if(modalDesc) modalDesc.textContent = "";
     }
 
     if(polaroids){
       polaroids.addEventListener("click", (e)=>{
         const card = e.target.closest(".polaroid");
         if(!card) return;
-        openModal(card.dataset.src, card.dataset.title);
+        openModal(card.dataset.src, card.dataset.title, card.dataset.desc);
       });
     }
     if(closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
@@ -2344,7 +2355,6 @@ y recuerdos que se van a quedar.`;
       if(e.target === modal) closeModal();
     });
 
-    /* ========= NO ULTRA (huye) ========= */
     const btnStage = document.getElementById("btnStage");
     const noBtn = document.getElementById("noBtn");
     const yesBtn = document.getElementById("yesBtn");
@@ -2448,7 +2458,6 @@ y recuerdos que se van a quedar.`;
     window.addEventListener("resize", placeNoInitial);
     placeNoInitial();
 
-    /* ========= CORAZONES PRO ========= */
     function confettiHeartsFromElement(el, count = 42){
       if(prefersReduced) return;
       const r = el.getBoundingClientRect();
@@ -2480,7 +2489,6 @@ y recuerdos que se van a quedar.`;
       }
     }
 
-    /* ========= SÍ -> FINAL ========= */
     function goFinal(){
       confettiHeartsFromElement(yesBtn, 60);
       playSfx(sfxPop, 0.22);
@@ -2492,7 +2500,6 @@ y recuerdos que se van a quedar.`;
       yesBtn.addEventListener("pointerup", (e)=>{ e.preventDefault(); e.stopPropagation(); goFinal(); });
     }
 
-    /* ========= FINAL ========= */
     function romanticFinal(){
       const finalCard = document.getElementById("finalCard");
       if(!finalCard) return;
@@ -2509,7 +2516,6 @@ y recuerdos que se van a quedar.`;
       }
     }
 
-    /* ========= CUPÓN: Descargar ========= */
     const dlCoupon = document.getElementById("dlCoupon");
     const copyMsg = document.getElementById("copyMsg");
 
