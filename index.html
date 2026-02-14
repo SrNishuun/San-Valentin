@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="es">
 <head>
@@ -1117,7 +1118,6 @@
       transform: translate(-112%, -50%);
     }
 
-    /* ✅ EFECTO PRO (NO) — vuelve a “escapar” suave y con más puntos */
     .choice.no{
       z-index: 5;
       border: 0;
@@ -1678,7 +1678,7 @@ Mediante este regalito quiero que sepas lo importante que eres en mi vida. Eres 
 
             <div class="polaroid" style="--rot:-2.2deg" data-src="Foto%2010.jpeg" data-title="🏍️" data-desc="Cuando nos llovió en el valle y andábamos en moto… Contigo cualquier aventura vale la pena. 🌧️💘">
               <div class="pic"><img src="Foto%2010.jpeg" alt="Foto 10" loading="lazy" decoding="async"></div>
-              <div class="cap">🏍️</div>
+              <div class="cap">Foto 10 🏍️</div>
             </div>
 
             <div class="polaroid" style="--rot:1.4deg" data-src="Foto%2011.jpeg" data-title="⛰️" data-desc="El Diego nos tomó esta linda foto en el Pichachén… Qué suerte la mía de tenerte. 📸🤍">
@@ -1949,18 +1949,36 @@ y recuerdos para toda la vida.
     const progBar = document.getElementById("progBar");
     let idx = 0;
 
+    // ✅ BLOQUEO: solo se puede entrar a la página final si apretaron "SÍ"
+    let allowFinal = false; // cambia a true solo al presionar SÍ
+    const FINAL_INDEX = 4;  // página 5 (0-based)
+    const ASK_INDEX   = 3;  // página 4 (donde está el SÍ/NO)
+
     function updateProgress(){
       const total = pages.length;
       const p = ((idx+1)/total)*100;
       document.documentElement.style.setProperty("--prog", p.toFixed(2) + "%");
       if(pageLabel) pageLabel.textContent = `PÁG ${idx+1}/${total}`;
+
       if(prevBtn) prevBtn.disabled = (idx === 0);
-      if(nextBtn) nextBtn.disabled = (idx === total-1);
+
+      // ✅ si estás en la pág 4 y NO han apretado "SÍ", deshabilita "SIGUIENTE"
+      const blockNext = (idx === ASK_INDEX && !allowFinal);
+      if(nextBtn) nextBtn.disabled = (idx === total-1) || blockNext;
+
       if(progBar) progBar.style.width = p.toFixed(2) + "%";
     }
 
     function goTo(newIdx, dir=1){
       newIdx = clamp(newIdx, 0, pages.length-1);
+
+      // ✅ no permitir entrar a la última página si no apretó "SÍ"
+      if(newIdx === FINAL_INDEX && !allowFinal){
+        toast("Solo puedes pasar si presionas SÍ 💖");
+        vibrate(10);
+        return;
+      }
+
       if(newIdx === idx) return;
 
       const from = pages[idx];
@@ -2059,11 +2077,10 @@ y recuerdos para toda la vida.
     if(modal) modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModalFn(); });
     document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModalFn(); });
 
-    /* ✅ NO button dodge PRO (más puntos, movimiento suave y “inteligente”) */
+    /* NO button dodge PRO */
     const noBtn = document.getElementById("noBtn");
     const stage = document.getElementById("btnStage");
 
-    // puntos “bonitos” dentro del stage (en porcentaje), para que no sea random feo:
     const NO_POINTS = [
       [0.10,0.25],[0.22,0.25],[0.34,0.25],[0.46,0.25],[0.58,0.25],[0.70,0.25],[0.82,0.25],
       [0.10,0.55],[0.22,0.55],[0.34,0.55],[0.46,0.55],[0.58,0.55],[0.70,0.55],[0.82,0.55],
@@ -2095,22 +2112,19 @@ y recuerdos para toda la vida.
 
       const now = performance.now();
       if(now < dodgeLockUntil) return;
-      dodgeLockUntil = now + 90; // evita que “tiemble” con eventos repetidos
+      dodgeLockUntil = now + 90;
 
       const r = stage.getBoundingClientRect();
       const pad = 10;
 
-      // aseguramos que el botón tenga medidas reales
       const bw = noBtn.offsetWidth || 120;
       const bh = noBtn.offsetHeight || 48;
 
       const [px, py] = pickNextPoint();
 
-      // convertir porcentaje a coordenadas, dejando margen para que no salga cortado
       let x = (r.width  * px) - (bw / 2);
       let y = (r.height * py) - (bh / 2);
 
-      // pequeño “jitter” profesional (suave), para que no parezca rígido
       x += rand(-8, 8);
       y += rand(-6, 6);
 
@@ -2124,7 +2138,6 @@ y recuerdos para toda la vida.
       vibrate(8);
     }
 
-    // Se mueve cuando intentas tocarlo / pasar encima
     if(noBtn){
       ["mouseenter","pointerenter","touchstart","pointerdown"].forEach(evt=>{
         noBtn.addEventListener(evt, (e)=>{ e.preventDefault(); moveNo("hover"); }, { passive:false });
@@ -2132,18 +2145,14 @@ y recuerdos para toda la vida.
       noBtn.addEventListener("click", (e)=>{ e.preventDefault(); moveNo("click"); });
     }
 
-    // Además: si el mouse se acerca MUCHO, también huye (queda pro y “genial”)
     if(stage && noBtn){
       stage.addEventListener("pointermove", (e)=>{
-        const sr = stage.getBoundingClientRect();
         const br = noBtn.getBoundingClientRect();
         const cx = br.left + br.width/2;
         const cy = br.top + br.height/2;
         const dx = e.clientX - cx;
         const dy = e.clientY - cy;
         const dist = Math.hypot(dx, dy);
-
-        // umbral de cercanía (ajusta si quieres)
         if(dist < 90) moveNo("near");
       });
     }
@@ -2155,7 +2164,7 @@ y recuerdos para toda la vida.
 
     if(finalMsg){
       const h = new Date().getHours();
-      let saludo = "Gracias por decir que sí.";
+      let saludo = "Sabía que dirías que sí";
       if(h < 12) saludo = "Sabía que dirías que sí";
       else if(h < 19) saludo = "Sabía que dirías que sí";
       else saludo = "Sabía que dirías que sí";
@@ -2168,6 +2177,8 @@ y recuerdos que se van a quedar hasta que seamos viejitos.`;
 
     if(yesBtn){
       yesBtn.addEventListener("click", ()=>{
+        allowFinal = true;              // ✅ habilita la última página SOLO aquí
+        updateProgress();               // ✅ habilita el botón "SIGUIENTE" si corresponde
         confettiHeartsFromElement(yesBtn, 34);
         goTo(4, 1);
         setTimeout(()=> {
@@ -2240,7 +2251,7 @@ y recuerdos que se van a quedar hasta que seamos viejitos.`;
     }
 
     if(dlCoupon) dlCoupon.addEventListener("click", downloadCouponPNG);
-
   </script>
 </body>
 </html>
+```
