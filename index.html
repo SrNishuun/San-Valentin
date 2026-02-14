@@ -1,3 +1,4 @@
+```html
 <!doctype html>
 <html lang="es">
 <head>
@@ -472,6 +473,21 @@
       pointer-events:auto;
     }
 
+    /* ✅ Mejora de distribución Page 1 */
+    .page.cover{
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+    }
+    .page.cover .rule{ margin: 8px 0 8px; }
+    .page.cover .rule.thin{ margin: 8px 0 8px; }
+    .page.cover .bigQuestion{ margin: 14px 0 8px; }
+    .page.cover .centerNote{ margin: 10px 0 12px; }
+    .page.cover .columns{ gap: 12px; align-items: stretch; }
+    .page.cover .article, .page.cover .photo{ height: 100%; }
+    .page.cover .overlayBtn{ margin-top: 10px; }
+    .page.cover .miniFooter{ margin-top: 6px; }
+
     .page.flip-in-right{ animation: flipInRight .55s var(--ease) both; }
     .page.flip-out-left{ animation: flipOutLeft .45s var(--ease) both; }
     .page.flip-in-left{ animation: flipInLeft .55s var(--ease) both; }
@@ -523,9 +539,9 @@
       font-weight: 900;
       letter-spacing: -0.02em;
       color: var(--rose);
-      font-size: 46px;
+      font-size: clamp(34px, 7vw, 46px);
       line-height: 1;
-      margin: 8px 0 8px;
+      margin: 6px 0 6px;
     }
     body.night .masthead{ color: rgba(255,122,152,.95); }
 
@@ -549,12 +565,12 @@
     }
     body.night .bigQuestion{ color: rgba(255,122,152,.95); }
     .bigQuestion .small{
-      font-size: 24px;
+      font-size: 22px;
       letter-spacing: .06em;
       text-transform: uppercase;
     }
     .bigQuestion .script{
-      font-size: 52px;
+      font-size: clamp(42px, 7.2vw, 52px);
       font-weight: 900;
       letter-spacing: -0.03em;
       line-height: 1;
@@ -571,7 +587,7 @@
 
     .columns{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1fr 1fr;
       gap: 14px;
       align-items:start;
     }
@@ -608,7 +624,7 @@
       font-family: var(--serif);
       color: rgba(42,31,36,.78);
       line-height: 1.55;
-      font-size: 15px;
+      font-size: 15.5px;
       white-space: pre-line;
     }
     body.night .article p{ color: rgba(255,255,255,.76); }
@@ -619,6 +635,8 @@
       border-radius: 16px;
       padding: 10px;
       box-shadow: 0 10px 22px rgba(0,0,0,.06);
+      display:flex;
+      flex-direction:column;
     }
     body.night .photo{
       background: rgba(255,255,255,.06);
@@ -627,7 +645,7 @@
 
     .frame{
       width:100%;
-      aspect-ratio: 1 / 1.2;
+      aspect-ratio: 4 / 5;
       border-radius: 12px;
       background:
         radial-gradient(240px 180px at 30% 25%, rgba(225,23,79,.10), transparent 60%),
@@ -637,6 +655,7 @@
       place-items:center;
       overflow:hidden;
       position:relative;
+      flex: 1 1 auto;
     }
 
     .frame.loading::after{
@@ -694,7 +713,7 @@
     }
 
     .tickets{
-      margin-top: 16px;
+      margin-top: 12px;
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
@@ -1113,7 +1132,6 @@
       background: rgba(0,0,0,.08);
     }
 
-    /* ✅ descripción debajo de la imagen */
     .modalDesc{
       padding: 12px 14px 14px;
       background: rgba(255,255,255,.75);
@@ -1635,7 +1653,7 @@
       <div class="pages">
 
         <!-- PAGE 1 -->
-        <section class="page active" data-page="0" aria-label="Portada">
+        <section class="page active cover" data-page="0" aria-label="Portada">
           <div class="topline">
             <span>Edición especial</span>
             <span>Valentine</span>
@@ -1681,7 +1699,7 @@ Mediante este regalito quiero que sepas lo importante que eres en mi vida. Eres 
             </div>
           </div>
 
-          <!-- ✅ CORREGIDO: se elimina el cupón de ir al cine -->
+          <!-- ✅ Cupón de cine eliminado (queda solo uno) -->
           <div class="tickets">
             <div class="ticket">
               <div class="stub">San Valentín</div>
@@ -1713,14 +1731,14 @@ Mediante este regalito quiero que sepas lo importante que eres en mi vida. Eres 
               <div class="cell r1 c1">
                 <div class="reasonBlock">
                   <div class="n">1</div>
-                  <span class="txt">Tienes la sonrisa<br>más linda<br>del universo.</span>
+                  <span class="txt">Porque contigo<br>quiero construir<br>todo lo que viene,<br>paso a paso. 💍</span>
                 </div>
               </div>
               <div class="cell r1 c2"><div class="bigHeart">❤️</div></div>
               <div class="cell r1 c3">
                 <div class="reasonBlock">
                   <div class="n">3</div>
-                  <span class="txt">Contigo,<br>cualquier día se<br>siente especial.</span>
+                  <span class="txt">Porque me inspiras<br>a ser mejor<br>cada día. 🌿</span>
                 </div>
               </div>
 
@@ -1728,7 +1746,7 @@ Mediante este regalito quiero que sepas lo importante que eres en mi vida. Eres 
               <div class="cell r2 c2">
                 <div class="reasonBlock">
                   <div class="n">2</div>
-                  <span class="txt">Haces que mi<br>corazón lata<br>más rápido<br>cada vez que<br>te pienso</span>
+                  <span class="txt">Porque contigo<br>no solo sueño,<br>también construyo. 🏡</span>
                 </div>
               </div>
               <div class="cell r2 c3"><div class="bigHeart">❤️</div></div>
@@ -1736,14 +1754,14 @@ Mediante este regalito quiero que sepas lo importante que eres en mi vida. Eres 
               <div class="cell r3 c1">
                 <div class="reasonBlock">
                   <div class="n">4</div>
-                  <span class="txt">Eres mi<br>persona<br>favorita<br>para<br>compartir<br>momentos.</span>
+                  <span class="txt">Porque somos el<br>mejor equipo que<br>pueda existir. 🤝</span>
                 </div>
               </div>
               <div class="cell r3 c2"><div class="bigHeart">❤️</div></div>
               <div class="cell r3 c3">
                 <div class="reasonBlock">
                   <div class="n">5</div>
-                  <span class="txt">No imagino<br>a nadie<br>más a mi<br>lado en<br>este San<br>Valentín</span>
+                  <span class="txt">Porque contigo aprendí<br>lo que realmente<br>significa amar. ❤️</span>
                 </div>
               </div>
             </div>
@@ -1925,8 +1943,8 @@ y una sonrisa nerviosa:
               </div>
 
               <div class="initials">
-                <div class="init" id="init1">A</div>
-                <div class="init" id="init2">J</div>
+                <div class="init" id="init1">N</div>
+                <div class="init" id="init2">C</div>
               </div>
 
               <p id="finalMsg">
@@ -1957,7 +1975,7 @@ y recuerdos que se van a quedar.
           <button id="prev" type="button">PAG. ANTERIOR</button>
           <button id="next" type="button">PAG. SIGUIENTE</button>
 
-          <!-- ✅ CORREGIDO: se elimina el botón "Compartir" -->
+          <!-- ✅ Botón "Compartir" eliminado -->
           <div class="navChips">
             <button class="chip" id="toggleNight" type="button" aria-label="Cambiar modo">🌙 Modo</button>
           </div>
@@ -1991,8 +2009,10 @@ y recuerdos que se van a quedar.
     });
 
     const NOMBRE = "Tu Amor";
-    const INI_1 = "A";
-    const INI_2 = "J";
+
+    /* ✅ Iniciales finales: N y C */
+    const INI_1 = "N";
+    const INI_2 = "C";
 
     const bgMusic = document.getElementById("bgMusic");
     const sfxPage = document.getElementById("sfxPage");
@@ -2588,3 +2608,4 @@ y recuerdos que se van a quedar.`;
   </script>
 </body>
 </html>
+```
